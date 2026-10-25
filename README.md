@@ -80,6 +80,14 @@ that stack several components (like the home page) load a small composition
 stylesheet, `assets/css/pages/home.css`, which pins the page-level look back to
 what each section expects.
 
+The content pages — `pages/products.html`, `pages/product-detail.html` and
+`pages/contact.html` — embed the shared header and footer markup directly, so
+the navigation and footer links work everywhere. They also load
+`assets/css/components/page-chrome.css`, which reserves room for the fixed
+header and keeps the chrome identical on every host page. The auth pages
+(`login`, `forgot-password`, `otp-verification`) use their own slim headers
+instead.
+
 ## Getting started
 
 Everything is static, so you can simply open `index.html` in a browser. Some
