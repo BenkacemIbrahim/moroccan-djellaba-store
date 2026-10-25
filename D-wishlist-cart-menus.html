@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist & Cart Menus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            playfair: ['"Playfair Display"', 'serif']
+          },
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Updated Google Fonts to include Inter font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Added CSS root variables and theme support from original header */
+    :root {
+      --primary: #1a1a1a;
+      --surface: #ffffff;
+      --surface-hover: #f8fafc;
+      --text-primary: #1a1a1a;
+      --text-secondary: #64748b;
+      --accent: #d4af37;
+      --border: #e2e8f0;
+    }
+
+    [data-theme="dark"] {
+      --primary: #ffffff;
+      --surface: #1a1a1a;
+      --surface-hover: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --accent: #d4af37;
+      --border: #374151;
+    }
+
+    body {
+      background: var(--surface);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Updated button styles to match original header exactly */
+    .icon-button {
+      position: relative;
+      background: transparent;
+      border: none;
+      transition: color 0.3s ease;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .icon-button:hover {
+      color: #C8A95A;
+    }
+
+    .btn-professional {
+      background: linear-gradient(135deg, #C8A95A, #d4b882);
+      border: 1px solid rgba(200, 169, 90, 0.3);
+      box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-professional:hover {
+      background: linear-gradient(135deg, #d4b882, #C8A95A);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(200, 169, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #1DA851);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #1DA851, #25D366);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    /* ===== BADGE STYLES ===== */
+    .cart-badge,
+    .wishlist-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    /* ===== LOGO STYLES ===== */
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #0f172a;
+      letter-spacing: 1px;
+    }
+
+    .logo-subtitle {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #0f172a, #1e293b, #C8A95A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== SIDEBAR STYLES ===== */
+    .cart-sidebar,
+    .wishlist-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 360px;
+      height: 100vh;
+      height: 100dvh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .cart-sidebar.active,
+    .wishlist-sidebar.active {
+      transform: translateX(0);
+    }
+
+    .cart-sidebar .flex-1.overflow-y-auto,
+    .wishlist-sidebar .flex-1.overflow-y-auto {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    /* ===== OVERLAY STYLES ===== */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== PRODUCT CARD STYLES ===== */
+    .product-card-professional {
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border: 1px solid rgba(226, 232, 240, 0.6);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0;
+      margin-bottom: 12px;
+      padding: 12px;
+    }
+
+    .product-card-professional:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(200, 169, 90, 0.1);
+      border-color: rgba(200, 169, 90, 0.2);
+    }
+
+    .remove-product-icon {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(15, 23, 42, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
+
+    /* ===== SCROLLBAR STYLES ===== */
+    .cart-products::-webkit-scrollbar,
+    .wishlist-products::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cart-products::-webkit-scrollbar-track,
+    .wishlist-products::-webkit-scrollbar-track {
+      background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+      border-radius: 10px;
+    }
+
+    .cart-products::-webkit-scrollbar-thumb,
+    .wishlist-products::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #C8A95A, #b8965a);
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-products::-webkit-scrollbar-thumb:hover,
+    .wishlist-products::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(to bottom, #d4b882, #C8A95A);
+    }
+
+    /* ===== UTILITY STYLES ===== */
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    .quantity-minus:hover,
+    .quantity-plus:hover {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    /* ===== RESPONSIVE STYLES ===== */
+    @media (max-width: 767px) {
+
+      .wishlist-sidebar,
+      .cart-sidebar {
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+
+      .wishlist-sidebar .flex-1.overflow-y-auto,
+      .cart-sidebar .flex-1.overflow-y-auto {
+        padding-bottom: 120px;
+      }
+
+      .wishlist-sidebar .p-8.border-t,
+      .cart-sidebar .p-8.border-t {
+        padding: 16px 20px;
+        position: sticky;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid #e2e8f0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .cart-sidebar .btn-whatsapp,
+      .wishlist-sidebar .btn-professional {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        min-height: 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .wishlist-sidebar .flex-1.overflow-y-auto,
+      .cart-sidebar .flex-1.overflow-y-auto {
+        padding-bottom: 140px;
+      }
+
+      .cart-sidebar .p-8.border-t,
+      .wishlist-sidebar .p-8.border-t {
+        padding: 12px 16px;
+      }
+    }
+
+    /* ===== COMPONENT SIZE ADJUSTMENTS ===== */
+    .cart-sidebar .flex-shrink-0,
+    .wishlist-sidebar .flex-shrink-0 {
+      padding: 20px;
+    }
+
+    .cart-sidebar .flex-shrink-0 .logo-text,
+    .wishlist-sidebar .flex-shrink-0 .logo-text {
+      font-size: 16px;
+    }
+
+    .cart-sidebar .flex-shrink-0 .logo-subtitle,
+    .wishlist-sidebar .flex-shrink-0 .logo-subtitle {
+      font-size: 8px;
+    }
+
+    /* Test header styles */
+    .test-header {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<!-- Updated body class to use font-sans -->
+
+<body class="font-sans bg-gray-50 min-h-screen">
+
+  <!-- Test Header -->
+  <header class="test-header">
+    <div class="flex items-center justify-between max-w-6xl mx-auto">
+      <h1 class="text-xl font-bold">Test Header</h1>
+      <div class="flex items-center space-x-4">
+        <button class="icon-button w-9 h-9 flex items-center justify-center" id="wishlist-btn">
+          <i class="ph ph-heart text-xl"></i>
+          <span class="wishlist-badge" id="wishlist-badge" style="display: none;">0</span>
+        </button>
+        <button class="icon-button w-9 h-9 flex items-center justify-center" id="cart-btn">
+          <i class="ph ph-shopping-cart text-xl"></i>
+          <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== WISHLIST SIDEBAR ===== -->
+  <div class="wishlist-sidebar" id="wishlist-sidebar">
+    <!-- Wishlist Header -->
+    <div
+      class="flex items-center justify-between p-8 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white flex-shrink-0">
+      <div class="flex items-center">
+        <div class="h-12 w-12 bg-gray-200 rounded mr-4"></div>
+        <div>
+          <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+          <p class="text-xs text-gray-500 font-medium tracking-wide">MY WISHLIST</p>
+        </div>
+      </div>
+      <button id="close-wishlist"
+        class="text-gray-500 hover:text-gray-700 focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Wishlist Products -->
+    <div class="flex-1 overflow-y-auto wishlist-products p-6">
+      <!-- Wishlist empty state -->
+      <div id="wishlist-empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+        <div class="mb-6">
+          <i class="ph ph-heart text-6xl text-gray-400 mb-4"></i>
+          <h3 class="font-playfair font-bold text-xl text-gray-800 mb-2">Your Wishlist is Empty</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            Save items you love by clicking the heart icon on any product.
+          </p>
+        </div>
+
+        <div class="space-y-3 w-full max-w-xs">
+          <button
+            class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-2"
+            onclick="closeWishlist()">
+            <i class="ph ph-shopping-cart text-lg"></i>
+            <span>Start Shopping</span>
+          </button>
+          <button
+            class="w-full border border-yellow-600 text-yellow-600 py-3 font-bold text-sm uppercase tracking-wide hover:bg-yellow-600 hover:text-white transition-all duration-200"
+            onclick="closeWishlist()">
+            Browse Collections
+          </button>
+        </div>
+
+        <p class="text-xs text-gray-400 mt-6">
+          Discover our latest arrivals and add your favorites to build your perfect wishlist.
+        </p>
+      </div>
+
+      <!-- Container for wishlist items (hidden when empty) -->
+      <div id="wishlist-items-container" class="hidden">
+        <div class="text-xs text-gray-600 mb-4 text-left" id="wishlist-count">You have 0 items in your wishlist.</div>
+        <div class="space-y-4" id="wishlist-items">
+          <!-- Wishlist items will be added here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Wishlist Footer -->
+    <div class="p-8 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-white flex-shrink-0 hidden"
+      id="wishlist-footer">
+      <div class="space-y-3">
+        <button
+          class="w-full btn-professional text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3 add-all-to-cart-btn">
+          <span>Add All to Cart</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CART SIDEBAR ===== -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <!-- Cart Header -->
+    <div
+      class="flex items-center justify-between p-8 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white flex-shrink-0">
+      <div class="flex items-center">
+        <div class="h-12 w-12 bg-gray-200 rounded mr-4"></div>
+        <div>
+          <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+          <p class="text-xs text-gray-500 font-medium tracking-wide">SHOPPING CART</p>
+        </div>
+      </div>
+      <button id="close-cart"
+        class="text-gray-500 hover:text-gray-700 focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Cart Products -->
+    <div class="flex-1 overflow-y-auto cart-products p-6">
+      <!-- Cart empty state -->
+      <div id="cart-empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+        <div class="mb-6">
+          <i class="ph ph-shopping-cart text-6xl text-gray-400 mb-4"></i>
+          <h3 class="font-playfair font-bold text-xl text-gray-800 mb-2">Your Cart is Empty</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            Add some items to your cart to get started with your order.
+          </p>
+        </div>
+
+        <div class="space-y-3 w-full max-w-xs">
+          <button
+            class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-2"
+            onclick="closeCart()">
+            <i class="ph ph-shopping-cart text-lg"></i>
+            <span>Start Shopping</span>
+          </button>
+          <button
+            class="w-full border border-yellow-600 text-yellow-600 py-3 font-bold text-sm uppercase tracking-wide hover:bg-yellow-600 hover:text-white transition-all duration-200"
+            onclick="closeCart()">
+            Browse Products
+          </button>
+        </div>
+
+        <p class="text-xs text-gray-400 mt-6">
+          Explore our collections and find the perfect items for your style.
+        </p>
+      </div>
+
+      <!-- Container for cart items (hidden when empty) -->
+      <div id="cart-items-container" class="hidden">
+        <div class="space-y-4" id="cart-items">
+          <!-- Cart items will be added here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Footer -->
+    <div class="p-8 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-white flex-shrink-0 hidden"
+      id="cart-footer">
+      <div class="space-y-3 mb-6">
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-gray-600">Shipping:</span>
+          <span class="font-semibold text-green-600">FREE</span>
+        </div>
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-gray-600">Tax:</span>
+          <span class="font-semibold text-gray-800">0.00 MAD</span>
+        </div>
+        <div class="border-t border-gray-200 pt-3">
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-bold text-gray-800 font-playfair">Total:</span>
+            <span class="text-xl font-bold text-yellow-600">0.00 MAD</span>
+          </div>
+        </div>
+      </div>
+      <button
+        class="w-full btn-whatsapp text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3">
+        <i class="ph ph-whatsapp-logo text-lg"></i>
+        <span>Buy Now</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== OVERLAY ===== -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ===== DOM ELEMENT REFERENCES =====
+    const elements = {
+      // Cart
+      cartBtn: document.getElementById('cart-btn'),
+      cartSidebar: document.getElementById('cart-sidebar'),
+      closeCart: document.getElementById('close-cart'),
+
+      // Wishlist
+      wishlistBtn: document.getElementById('wishlist-btn'),
+      wishlistSidebar: document.getElementById('wishlist-sidebar'),
+      closeWishlist: document.getElementById('close-wishlist'),
+
+      // Utility
+      overlay: document.getElementById('overlay'),
+      body: document.body
+    };
+
+    // ===== UTILITY FUNCTIONS =====
+    function closeAllMenus() {
+      elements.cartSidebar.classList.remove('active');
+      elements.wishlistSidebar.classList.remove('active');
+      elements.overlay.classList.remove('active');
+      elements.body.classList.remove('no-scroll');
+      elements.body.style.overflow = '';
+    }
+
+    function animateItems(container, selector) {
+      const items = container.querySelectorAll(selector);
+      items.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          item.style.transition = 'all 0.3s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    }
+
+    // ===== MENU FUNCTIONS =====
+    function openCart() {
+      closeAllMenus();
+      elements.cartSidebar.classList.add('active');
+      elements.overlay.classList.add('active');
+      elements.body.classList.add('no-scroll');
+      animateItems(elements.cartSidebar, '.product-card-professional');
+    }
+
+    function openWishlist() {
+      closeAllMenus();
+      elements.wishlistSidebar.classList.add('active');
+      elements.overlay.classList.add('active');
+      elements.body.classList.add('no-scroll');
+      animateItems(elements.wishlistSidebar, '.product-card-professional');
+    }
+
+    function closeCart() {
+      closeAllMenus();
+    }
+
+    function closeWishlist() {
+      closeAllMenus();
+    }
+
+    // ===== EVENT LISTENERS =====
+
+    // Cart Events
+    elements.cartBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openCart();
+    });
+
+    elements.closeCart.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeAllMenus();
+    });
+
+    // Wishlist Events
+    elements.wishlistBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openWishlist();
+    });
+
+    elements.closeWishlist.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeAllMenus();
+    });
+
+    // Overlay Events
+    elements.overlay.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeAllMenus();
+    });
+
+    // Prevent sidebar content clicks from closing
+    [elements.cartSidebar, elements.wishlistSidebar].forEach(element => {
+      element.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+
+    // ===== STATE MANAGEMENT =====
+    function updateWishlistState() {
+      const wishlistItems = document.querySelectorAll('#wishlist-items .product-card-professional');
+      const wishlistBadge = document.getElementById('wishlist-badge');
+      const wishlistCount = document.getElementById('wishlist-count');
+      const wishlistItemsContainer = document.getElementById('wishlist-items-container');
+      const wishlistEmptyState = document.getElementById('wishlist-empty-state');
+      const wishlistFooter = document.getElementById('wishlist-footer');
+
+      if (wishlistItems.length === 0) {
+        wishlistItemsContainer.classList.add('hidden');
+        wishlistEmptyState.classList.remove('hidden');
+        wishlistFooter.classList.add('hidden');
+        wishlistBadge.style.display = 'none';
+      } else {
+        wishlistItemsContainer.classList.remove('hidden');
+        wishlistEmptyState.classList.add('hidden');
+        wishlistFooter.classList.remove('hidden');
+        wishlistBadge.style.display = 'flex';
+        wishlistBadge.textContent = wishlistItems.length;
+        wishlistCount.textContent = `You have ${wishlistItems.length} item${wishlistItems.length !== 1 ? 's' : ''} in your wishlist.`;
+      }
+    }
+
+    function updateCartState() {
+      const cartItems = document.querySelectorAll('#cart-items .product-card-professional');
+      const cartBadge = document.getElementById('cart-badge');
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const cartEmptyState = document.getElementById('cart-empty-state');
+      const cartFooter = document.getElementById('cart-footer');
+
+      if (cartItems.length === 0) {
+        cartItemsContainer.classList.add('hidden');
+        cartEmptyState.classList.remove('hidden');
+        cartFooter.classList.add('hidden');
+        cartBadge.style.display = 'none';
+      } else {
+        cartItemsContainer.classList.remove('hidden');
+        cartEmptyState.classList.add('hidden');
+        cartFooter.classList.remove('hidden');
+        cartBadge.style.display = 'flex';
+        cartBadge.textContent = cartItems.length;
+      }
+    }
+
+    // ===== GLOBAL EVENT LISTENERS =====
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAllMenus();
+      }
+    });
+
+    // Initialize states on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      updateWishlistState();
+      updateCartState();
+    });
+  </script>
+</body>
+
+</html>

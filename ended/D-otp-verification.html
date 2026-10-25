@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJELLABTI - OTP Verification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Added Phosphor Icons for language dropdown -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#0f172a', light: '#1e293b', dark: '#020617' },
+            accent: { DEFAULT: '#C8A95A', light: '#d4b882', dark: '#b8965a' },
+            surface: { DEFAULT: '#ffffff', elevated: '#f8fafc', hover: '#f1f5f9' },
+            border: { DEFAULT: '#e2e8f0', light: '#f1f5f9' },
+            text: { primary: '#0f172a', secondary: '#475569', muted: '#64748b' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            playfair: ['"Playfair Display"', 'serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-down': 'slideDown 0.3s ease-out',
+            'scale-in': 'scaleIn 0.2s ease-out'
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideDown: { '0%': { transform: 'translateY(-10px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+            scaleIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base Styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-image:
+        linear-gradient(rgba(248, 250, 252, 0.85), rgba(248, 250, 252, 0.85)),
+        url('islamic-pattern-bg.png');
+      background-size: cover, cover;
+      background-position: center, center -50px;
+      /* gradient stays centered, image moves down */
+      background-repeat: no-repeat, no-repeat;
+      background-attachment: fixed, fixed;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #C8A95A;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4b882;
+    }
+
+    /* Added transparent header styles */
+    .transparent-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo img {
+      height: 48px;
+      /* increased from 40px to 48px */
+      width: auto;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #0f172a;
+      letter-spacing: 1px;
+    }
+
+    .logo-subtitle {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: -2px;
+    }
+
+    /* Language Dropdown Styles */
+    .language-dropdown {
+      position: relative;
+    }
+
+    .language-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      border-radius: 8px;
+      color: #475569;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .language-btn:hover {
+      background: rgba(255, 255, 255, 0.95);
+      color: #C8A95A;
+    }
+
+    .language-btn img {
+      width: 20px;
+      height: 12px;
+      object-fit: cover;
+    }
+
+    .language-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      width: 128px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      padding: 4px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+    }
+
+    .language-dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      color: #475569;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+      background: rgba(200, 169, 90, 0.1);
+      color: #C8A95A;
+    }
+
+    .language-option img {
+      width: 20px;
+      height: 12px;
+      object-fit: cover;
+    }
+
+    .language-option.active {
+      color: #C8A95A;
+      font-weight: 600;
+    }
+
+    /* Layout Components */
+    .page-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .content-card {
+      /* Enhanced card transparency and backdrop blur for better visibility over pattern */
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(25px);
+      border-radius: 24px;
+      box-shadow: 0 25px 50px rgba(15, 23, 42, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+      width: 100%;
+      /* Reduced max-width from 384px to 320px */
+      max-width: 320px;
+      /* Reduced padding from 20px to 16px */
+      padding: 16px;
+      margin: 40px 0;
+      animation: scale-in;
+      /* Added subtle border to enhance card definition over pattern */
+      border: 1px solid rgba(200, 169, 90, 0.1);
+    }
+
+    /* Header Styles */
+    .brand-header {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      height: 48px;
+      /* increased from 40px to 48px */
+      width: auto;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #C8A95A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    /* Form Styles */
+    .form-container {
+      /* Reduced padding from 32px to 24px */
+      padding: 24px;
+    }
+
+    .form-header {
+      text-align: center;
+      /* Reduced margin-bottom from 24px to 20px */
+      margin-bottom: 20px;
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #0f172a;
+      margin: 0 0 8px 0;
+    }
+
+    .form-description {
+      color: #64748b;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    /* OTP Input Styles */
+    .otp-container {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      /* Reduced margin-bottom from 24px to 20px */
+      margin-bottom: 20px;
+    }
+
+    .otp-input {
+      /* Reduced size from 40px to 36px */
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      /* Reduced font-size from 20px to 18px */
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #e2e8f0;
+      border-radius: 0;
+      /* Enhanced input background for better visibility over pattern */
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .otp-input:focus {
+      border-color: #C8A95A;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(200, 169, 90, 0.1);
+    }
+
+    .otp-input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Button Styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #C8A95A, #d4b882);
+      border: 1px solid rgba(200, 169, 90, 0.3);
+      box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: white;
+      font-weight: 600;
+      /* Reduced padding from 12px 18px to 10px 16px */
+      padding: 10px 16px;
+      border-radius: 0;
+      width: 100%;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #d4b882, #C8A95A);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(200, 169, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-link {
+      color: #C8A95A;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-link:hover {
+      color: #b8965a;
+    }
+
+    .btn-link:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Message Styles */
+    .message {
+      text-align: center;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      min-height: 20px;
+      font-weight: 600;
+    }
+
+    .message.success {
+      color: #10b981;
+    }
+
+    .message.error {
+      color: #ef4444;
+    }
+
+    /* Action Sections */
+    .action-section {
+      text-align: center;
+      /* Reduced margin-top from 20px to 16px */
+      margin-top: 16px;
+      /* Reduced padding-top from 20px to 16px */
+      padding-top: 16px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .resend-inline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #64748b;
+      font-size: 0.75rem;
+    }
+
+    .back-action {
+      text-align: center;
+      /* Reduced margin-top from 16px to 12px */
+      margin-top: 12px;
+    }
+
+    /* Footer Styles */
+    .footer {
+      margin-top: auto;
+      padding: 32px 20px 24px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-copyright {
+      color: #64748b;
+      font-size: 0.875rem;
+      margin: 0 0 16px 0;
+      font-weight: 500;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: #475569;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-link:hover {
+      color: #C8A95A;
+    }
+
+    @media (max-width: 768px) {
+      .transparent-header .logo-text {
+        display: none;
+      }
+
+      .content-card {
+        margin: 16px;
+        max-width: calc(100% - 32px);
+        padding: 20px;
+      }
+
+      .form-title {
+        font-size: 1.75rem;
+      }
+
+      .otp-input {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .otp-container {
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .form-container {
+        padding: 28px;
+      }
+
+      .footer-links {
+        gap: 16px;
+      }
+    }
+
+    @media (min-width: 481px) and (max-width: 640px) {
+      .content-card {
+        margin: 20px;
+        max-width: calc(100% - 40px);
+        padding: 24px;
+      }
+
+      .otp-input {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+
+      .otp-container {
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .form-container {
+        padding: 32px;
+      }
+
+      .form-title {
+        font-size: 1.875rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .transparent-header {
+        padding: 12px 16px;
+      }
+
+      .header-logo img {
+        height: 36px;
+        /* increased from 32px to 36px for mobile */
+      }
+
+      .language-btn {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+
+      .content-card {
+        margin: 12px;
+        max-width: calc(100% - 24px);
+        padding: 16px;
+      }
+
+      .form-container {
+        padding: 24px;
+      }
+
+      .form-title {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+      }
+
+      .otp-input {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+
+      .otp-container {
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      /* Removed flex-direction: column to keep resend text inline on mobile */
+      .resend-inline {
+        gap: 4px;
+        font-size: 0.7rem;
+      }
+
+      /* Reverted footer to horizontal layout with smaller text */
+      .footer-links {
+        gap: 8px;
+      }
+
+      .footer-link {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Added transparent header with logo and language selector -->
+  <header class="transparent-header">
+    <div class="header-logo">
+      <img src="logo.png" alt="DJELLABTI Logo">
+      <div class="hidden sm:block">
+        <div class="logo-text">DJELLABTI</div>
+        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+      </div>
+    </div>
+
+    <div class="language-dropdown">
+      <button class="language-btn" id="languageBtn">
+        <img id="currentFlag" src="https://flagcdn.com/w40/gb.png" alt="English Flag">
+        <span id="currentLang">EN</span>
+        <i class="ph ph-caret-down" id="languageChevron"></i>
+      </button>
+      <div class="language-dropdown-menu" id="languageMenu">
+        <a href="#" class="language-option active" data-lang="EN" data-flag="https://flagcdn.com/w40/gb.png">
+          <img src="https://flagcdn.com/w40/gb.png" alt="English Flag">
+          EN
+        </a>
+        <a href="#" class="language-option" data-lang="FR" data-flag="https://flagcdn.com/w40/fr.png">
+          <img src="https://flagcdn.com/w40/fr.png" alt="French Flag">
+          FR
+        </a>
+        <a href="#" class="language-option" data-lang="AR" data-flag="https://flagcdn.com/w40/ma.png">
+          <img src="https://flagcdn.com/w40/ma.png" alt="Arabic Flag">
+          AR
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="content-card">
+      <!-- Brand Header -->
+      <header class="brand-header">
+        <img src="logo.png" alt="DJELLABTI Logo" class="brand-logo">
+        <div>
+          <h1 class="brand-title">DJELLABTI</h1>
+          <p class="brand-subtitle">TRADITIONAL WEAR</p>
+        </div>
+      </header>
+
+      <!-- Form Content -->
+      <div class="form-container">
+        <div class="form-header">
+          <h2 class="form-title">Verify Your Email</h2>
+          <p class="form-description">Please enter the 6-digit code sent to your email address.</p>
+        </div>
+
+        <form id="otpForm" method="POST" action="" novalidate>
+          <!-- OTP Input Fields -->
+          <div class="otp-container" role="group" aria-label="Enter 6-digit verification code">
+            <input type="text" name="otp_digit_1" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 1">
+            <input type="text" name="otp_digit_2" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 2">
+            <input type="text" name="otp_digit_3" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 3">
+            <input type="text" name="otp_digit_4" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 4">
+            <input type="text" name="otp_digit_5" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 5">
+            <input type="text" name="otp_digit_6" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric"
+              autocomplete="one-time-code" required aria-label="Digit 6">
+          </div>
+
+          <!-- Status Message -->
+          <div id="statusMessage" class="message" role="status" aria-live="polite">
+            <!-- PHP will populate error/success messages here -->
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-primary" id="verifyButton">
+            Verify Code
+          </button>
+        </form>
+
+        <!-- Updated resend section to display inline -->
+        <section class="action-section">
+          <div class="resend-inline">
+            <span>Didn't receive the code?</span>
+            <form method="POST" action="" style="display: inline;">
+              <input type="hidden" name="action" value="resend">
+              <button type="submit" class="btn-link" id="resendButton">Resend Code</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Updated back navigation - removed arrow icon -->
+        <section class="back-action">
+          <a href="" class="btn-link">
+            Back to Sign In
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Added footer with copyright and navigation links -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-copyright">© 2025 DJELLABTI. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Support</a>
+        <a href="#" class="footer-link">About Us</a>
+        <a href="#" class="footer-link">Contact Us</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    class OTPVerification {
+      constructor() {
+        this.otpInputs = document.querySelectorAll('.otp-input');
+        this.init();
+      }
+
+      init() {
+        this.setupOTPInputs();
+        this.focusFirstInput();
+      }
+
+      setupOTPInputs() {
+        this.otpInputs.forEach((input, index) => {
+          // Handle input
+          input.addEventListener('input', (e) => this.handleInput(e, index));
+
+          // Handle keydown for backspace
+          input.addEventListener('keydown', (e) => this.handleKeydown(e, index));
+
+          // Handle paste for first input
+          if (index === 0) {
+            input.addEventListener('paste', (e) => this.handlePaste(e));
+          }
+        });
+      }
+
+      handleInput(event, index) {
+        const input = event.target;
+
+        // Allow only digits
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+        // Move to next input if current is filled
+        if (input.value.length === 1 && index < this.otpInputs.length - 1) {
+          this.otpInputs[index + 1].focus();
+        }
+      }
+
+      handleKeydown(event, index) {
+        if (event.key === 'Backspace' && event.target.value.length === 0 && index > 0) {
+          this.otpInputs[index - 1].focus();
+        }
+      }
+
+      handlePaste(event) {
+        const pasteData = event.clipboardData.getData('text').trim();
+
+        if (pasteData.length === this.otpInputs.length && /^\d+$/.test(pasteData)) {
+          event.preventDefault();
+
+          pasteData.split('').forEach((char, i) => {
+            if (this.otpInputs[i]) {
+              this.otpInputs[i].value = char;
+            }
+          });
+
+          this.otpInputs[this.otpInputs.length - 1].focus();
+        }
+      }
+
+      focusFirstInput() {
+        if (this.otpInputs.length > 0) {
+          this.otpInputs[0].focus();
+        }
+      }
+    }
+
+    class LanguageDropdown {
+      constructor() {
+        this.languageBtn = document.getElementById('languageBtn');
+        this.languageMenu = document.getElementById('languageMenu');
+        this.currentFlag = document.getElementById('currentFlag');
+        this.currentLang = document.getElementById('currentLang');
+        this.languageChevron = document.getElementById('languageChevron');
+        this.languageOptions = document.querySelectorAll('.language-option');
+
+        this.init();
+      }
+
+      init() {
+        this.languageBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleDropdown();
+        });
+
+        this.languageOptions.forEach(option => {
+          option.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.selectLanguage(option);
+          });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          this.closeDropdown();
+        });
+      }
+
+      toggleDropdown() {
+        const isOpen = this.languageMenu.classList.contains('show');
+        if (isOpen) {
+          this.closeDropdown();
+        } else {
+          this.openDropdown();
+        }
+      }
+
+      openDropdown() {
+        this.languageMenu.classList.add('show');
+        this.languageChevron.style.transform = 'rotate(180deg)';
+      }
+
+      closeDropdown() {
+        this.languageMenu.classList.remove('show');
+        this.languageChevron.style.transform = 'rotate(0deg)';
+      }
+
+      selectLanguage(option) {
+        const lang = option.dataset.lang;
+        const flag = option.dataset.flag;
+
+        // Update current selection
+        this.currentLang.textContent = lang;
+        this.currentFlag.src = flag;
+        this.currentFlag.alt = `${lang} Flag`;
+
+        // Update active state
+        this.languageOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+
+        this.closeDropdown();
+      }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new OTPVerification();
+      new LanguageDropdown();
+    });
+  </script>
+</body>
+
+</html>

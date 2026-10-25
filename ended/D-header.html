@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJELLABTI - Modern Header</title>
+
+    <!-- External Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0f172a',
+                            light: '#1e293b',
+                            dark: '#020617'
+                        },
+                        accent: {
+                            DEFAULT: '#C8A95A',
+                            light: '#d4b882',
+                            dark: '#b8965a'
+                        },
+                        surface: {
+                            DEFAULT: '#ffffff',
+                            elevated: '#f8fafc',
+                            hover: '#f1f5f9'
+                        },
+                        border: {
+                            DEFAULT: '#e2e8f0',
+                            light: '#f1f5f9'
+                        },
+                        text: {
+                            primary: '#0f172a',
+                            secondary: '#475569',
+                            muted: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        playfair: ['"Playfair Display"', 'serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'scale-in': 'scaleIn 0.2s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'search-slide-down': 'searchSlideDown 0.3s ease-out',
+                        'search-slide-up': 'searchSlideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        searchSlideDown: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(0)' }
+                        },
+                        searchSlideUp: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+            --text-primary: #1a1a1a;
+            --text-secondary: #64748b;
+            --accent: #d4af37;
+            --border: #e2e8f0;
+        }
+
+        [data-theme="dark"] {
+            --primary: #ffffff;
+            --surface: #1a1a1a;
+            --surface-hover: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent: #d4af37;
+            --border: #374151;
+        }
+
+        body {
+            background: var(--surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== HEADER STYLES ===== */
+        .header-modern {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        /* ===== BUTTON STYLES ===== */
+        .icon-button {
+            position: relative;
+            background: transparent;
+            border: none;
+            transition: color 0.3s ease;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .icon-button:hover {
+            color: #C8A95A;
+        }
+
+        .btn-professional {
+            background: linear-gradient(135deg, #C8A95A, #d4b882);
+            border: 1px solid rgba(200, 169, 90, 0.3);
+            box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-professional:hover {
+            background: linear-gradient(135deg, #d4b882, #C8A95A);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 169, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #1DA851);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(135deg, #1DA851, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== BADGE STYLES ===== */
+        .cart-badge,
+        .wishlist-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* ===== NAVIGATION STYLES ===== */
+        .nav-menu {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .nav-link {
+            padding: 12px 20px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 0 4px;
+        }
+
+        .nav-link:hover {
+            color: #C8A95A;
+            background: rgba(200, 169, 90, 0.05);
+        }
+
+        .nav-link.active {
+            color: #C8A95A;
+            background: rgba(200, 169, 90, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #C8A95A;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 60%;
+        }
+
+        /* ===== LOGO STYLES ===== */
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .logo-subtitle {
+            font-size: 9px;
+            color: #64748b;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-top: -2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #C8A95A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== MOBILE MENU STYLES ===== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 16px 20px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: #C8A95A;
+            background: rgba(200, 169, 90, 0.05);
+            padding-left: 32px;
+        }
+
+        /* ===== SIDEBAR STYLES ===== */
+        .cart-sidebar,
+        .wishlist-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 360px;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            border-left: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: 100dvh;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .cart-sidebar.active,
+        .wishlist-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .cart-sidebar .flex-1.overflow-y-auto,
+        .wishlist-sidebar .flex-1.overflow-y-auto {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
+        /* ===== OVERLAY STYLES ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== PRODUCT CARD STYLES ===== */
+        .product-card-professional {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0;
+            margin-bottom: 12px;
+            padding: 12px;
+        }
+
+        .product-card-professional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(200, 169, 90, 0.1);
+            border-color: rgba(200, 169, 90, 0.2);
+        }
+
+        .remove-product-icon {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+        }
+
+        /* ===== SCROLLBAR STYLES ===== */
+        .cart-products::-webkit-scrollbar,
+        .wishlist-products::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-products::-webkit-scrollbar-track,
+        .wishlist-products::-webkit-scrollbar-track {
+            background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+            border-radius: 10px;
+        }
+
+        .cart-products::-webkit-scrollbar-thumb,
+        .wishlist-products::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #C8A95A, #b8965a);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-products::-webkit-scrollbar-thumb:hover,
+        .wishlist-products::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #d4b882, #C8A95A);
+        }
+
+        /* ===== SEARCH STYLES ===== */
+        .full-screen-search {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-out;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .full-screen-search.active {
+            transform: translateY(0);
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .full-screen-search-content {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .full-screen-search-input {
+            flex-grow: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #f1f5f9;
+            font-size: 1.25rem;
+            color: #0f172a;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .full-screen-search-input:focus {
+            background-color: #e2e8f0;
+        }
+
+        .full-screen-search-input::placeholder {
+            color: #64748b;
+        }
+
+        .full-screen-search-icon,
+        .full-screen-close-icon {
+            background: transparent;
+            border: none;
+            color: #475569;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .full-screen-search-icon:hover,
+        .full-screen-close-icon:hover {
+            color: #C8A95A;
+        }
+
+        /* ===== UTILITY STYLES ===== */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        .quantity-minus:hover,
+        .quantity-plus:hover {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* Disable hover effects on mobile screens for quantity and add-to-cart buttons */
+        @media (max-width: 768px) {
+
+            .quantity-minus:hover,
+            .quantity-plus:hover {
+                background: var(--surface-hover) !important;
+                color: var(--text-secondary) !important;
+            }
+
+            .add-to-cart-btn:hover {
+                background: var(--surface-hover) !important;
+                color: var(--text-secondary) !important;
+            }
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu #close-mobile-menu .icon-button {
+                padding: 10px;
+            }
+
+            .mobile-menu .logo-text {
+                font-size: 16px;
+            }
+
+            .mobile-menu .logo-subtitle {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            /* Disable hover effects on mobile */
+            .product-card-professional:hover {
+                transform: none;
+                box-shadow: none;
+                border-color: rgba(226, 232, 240, 0.6);
+            }
+
+            .icon-button:hover {
+                color: #475569;
+            }
+
+            .nav-link:hover {
+                color: #475569;
+                background: transparent;
+            }
+
+            .nav-link:hover::after {
+                width: 0;
+            }
+
+            .btn-professional:hover {
+                background: linear-gradient(135deg, #C8A95A, #d4b882);
+                transform: none;
+                box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+
+            .btn-whatsapp:hover {
+                background: linear-gradient(135deg, #25D366, #1DA851);
+                transform: none;
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+
+            .full-screen-search-icon:hover,
+            .full-screen-close-icon:hover {
+                color: #475569;
+            }
+
+            .quantity-minus:hover,
+            .quantity-plus:hover {
+                background: #f1f5f9;
+                color: #475569;
+            }
+
+            .add-to-cart-btn:hover {
+                background: #f1f5f9;
+                color: #475569;
+            }
+
+            #close-cart:hover,
+            #close-wishlist:hover {
+                color: #64748b;
+                transform: none;
+                background: transparent;
+            }
+
+            .mobile-nav-link:hover {
+                background: transparent;
+                color: #475569;
+            }
+
+            .wishlist-sidebar,
+            .cart-sidebar {
+                width: 100%;
+                max-width: 100%;
+                left: 0;
+                height: 100vh;
+                height: 100dvh;
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+
+            .wishlist-sidebar .flex-1.overflow-y-auto,
+            .cart-sidebar .flex-1.overflow-y-auto {
+                padding-bottom: 120px;
+            }
+
+            .wishlist-sidebar .p-8.border-t,
+            .cart-sidebar .p-8.border-t {
+                padding: 16px 20px;
+                position: sticky;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid #e2e8f0;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .cart-sidebar .btn-whatsapp,
+            .wishlist-sidebar .btn-professional {
+                padding: 16px 20px;
+                font-size: 0.9rem;
+                min-height: 48px;
+            }
+
+            .full-screen-search {
+                height: 60px;
+            }
+
+            .full-screen-search-input {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+
+            .full-screen-search-icon,
+            .full-screen-close-icon {
+                font-size: 1.2rem;
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .wishlist-sidebar .flex-1.overflow-y-auto,
+            .cart-sidebar .flex-1.overflow-y-auto {
+                padding-bottom: 140px;
+            }
+
+            .cart-sidebar .p-8.border-t,
+            .wishlist-sidebar .p-8.border-t {
+                padding: 12px 16px;
+            }
+        }
+
+        /* ===== COMPONENT SIZE ADJUSTMENTS ===== */
+        .cart-sidebar .flex-shrink-0,
+        .wishlist-sidebar .flex-shrink-0 {
+            padding: 20px;
+        }
+
+        .cart-sidebar .flex-shrink-0 .logo-text,
+        .wishlist-sidebar .flex-shrink-0 .logo-text {
+            font-size: 16px;
+        }
+
+        .cart-sidebar .flex-shrink-0 .logo-subtitle,
+        .wishlist-sidebar .flex-shrink-0 .logo-subtitle {
+            font-size: 8px;
+        }
+
+        .product-card-professional .w-24 {
+            width: 80px;
+        }
+
+        .product-card-professional .h-32 {
+            height: 100px;
+        }
+
+        .product-card-professional .font-semibold.text-sm {
+            font-size: 0.8rem;
+        }
+
+        .product-card-professional .font-bold.text-sm {
+            font-size: 0.8rem;
+        }
+
+        .product-card-professional .text-xs {
+            font-size: 0.65rem;
+        }
+
+        .product-card-professional .w-7,
+        .product-card-professional .h-7 {
+            width: 24px;
+            height: 24px;
+        }
+
+        .product-card-professional .quantity-display {
+            font-size: 0.8rem;
+        }
+
+        .cart-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 min-h-screen">
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="header-modern fixed top-0 left-0 w-full z-50">
+        <!-- Top Header Bar -->
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between relative">
+                <!-- Left Section: Mobile Menu & Controls -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden" id="mobile-menu-btn">
+                        <i class="ph ph-list text-xl"></i>
+                    </button>
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden"
+                        id="mobile-search-btn" onclick="openFullScreenSearch()">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <!-- Currency Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="currency-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <span id="selected-currency">MAD</span>
+                            <i id="currency-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="currency-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="EUR">
+                                EUR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="MAD">
+                                MAD
+                                <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="USD">
+                                USD
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="AED">
+                                AED
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="SAR">
+                                SAR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Language Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="language-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <img id="language-flag-icon" src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                class="w-5 h-3 object-cover mr-2">
+                            <span id="selected-language">EN</span>
+                            <i id="language-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="language-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="EN" data-flag="https://flagcdn.com/w40/gb.png">
+                                <img src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                EN <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="FR" data-flag="https://flagcdn.com/w40/fr.png">
+                                <img src="https://flagcdn.com/w40/fr.png" alt="French Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                FR
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="AR" data-flag="https://flagcdn.com/w40/ma.png">
+                                <img src="https://flagcdn.com/w40/ma.png" alt="Arabic Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                AR
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Section: Logo -->
+                <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0">
+                    <img src="logo.png" alt="DJELLABTI Logo" class="h-12 w-auto">
+                    <div class="hidden sm:block">
+                        <div class="logo-text">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Action Buttons -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center hidden md:flex"
+                        id="desktop-search-btn">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="wishlist-btn">
+                        <i class="ph ph-heart text-xl"></i>
+                        <!-- Updated wishlist badge from 3 to 1 -->
+                        <span class="wishlist-badge">1</span>
+                    </button>
+
+                    <!-- User Authentication Dropdown -->
+                    <div class="relative group">
+                        <button class="icon-button w-9 h-9 flex items-center justify-center" id="auth-dropdown-btn">
+                            <i class="ph ph-user text-xl"></i>
+                        </button>
+                        <div id="auth-dropdown-menu"
+                            class="absolute right-0 mt-2 w-40 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-right border border-border">
+                            <!-- Removed My Orders and Wishlist buttons -->
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-user mr-3"></i> My Profile
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-gear mr-3"></i> Settings
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-question mr-3 flex-shrink-0"></i>
+                                <span class="whitespace-nowrap">Help & Support</span>
+                            </a>
+                            <div class="border-t border-border my-1"></div>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-sign-out mr-3"></i> Sign Out
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="cart-btn">
+                        <i class="ph ph-shopping-cart text-xl"></i>
+                        <!-- Updated cart badge from 4 to 1 -->
+                        <span class="cart-badge">1</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu hidden md:block">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center space-x-2">
+                    <a href="#" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link">New Arrivals</a>
+                    <a href="#" class="nav-link">Djellaba</a>
+                    <a href="#" class="nav-link">Gandoura</a>
+                    <a href="#" class="nav-link">Abayas</a>
+                    <a href="#" class="nav-link">Hijabs</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== FULL SCREEN SEARCH ===== -->
+    <div class="full-screen-search" id="full-screen-search">
+        <div class="full-screen-search-content">
+            <input type="text" class="full-screen-search-input" placeholder="Search our store">
+            <button class="full-screen-search-icon">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="full-screen-close-icon" id="full-screen-close-search">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <!-- Mobile Menu Header -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="logo.png" alt="DJELLABTI Logo" class="h-10 w-auto">
+                    <div>
+                        <div class="logo-text text-lg">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+                <button id="close-mobile-menu" class="icon-button w-9 h-9 flex items-center justify-center">
+                    <i class="ph ph-x text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Settings -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Currency</label>
+                    <select id="mobile-currency-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EUR">EUR</option>
+                        <option value="MAD" selected>MAD</option>
+                        <option value="USD">USD</option>
+                        <option value="AED">AED</option>
+                        <option value="SAR">SAR</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Language</label>
+                    <select id="mobile-language-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EN" data-flag="https://flagcdn.com/w40/gb.png" selected>English</option>
+                        <option value="FR" data-flag="https://flagcdn.com/w40/fr.png">Français</option>
+                        <option value="AR" data-flag="https://flagcdn.com/w40/ma.png">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="py-4">
+            <a href="#" class="mobile-nav-link">Home</a>
+            <a href="#" class="mobile-nav-link">New Arrivals</a>
+            <a href="#" class="mobile-nav-link">Djellaba</a>
+            <a href="#" class="mobile-nav-link">Gandoura</a>
+            <a href="#" class="mobile-nav-link">Abayas</a>
+            <a href="#" class="mobile-nav-link">Hijabs</a>
+        </nav>
+    </div>
+
+    <!-- ===== WISHLIST SIDEBAR ===== -->
+    <div class="wishlist-sidebar" id="wishlist-sidebar">
+        <!-- Wishlist Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
+                </div>
+            </div>
+            <button id="close-wishlist"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Wishlist Products -->
+        <div class="flex-1 overflow-y-auto wishlist-products p-6">
+            <!-- Updated text from 3 items to 1 item -->
+            <div class="text-xs text-text-secondary mb-4 text-left">You have 1 item in your wishlist.</div>
+            <div class="space-y-4">
+                <!-- Wishlist Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4">
+                            <p class="text-xs text-text-muted">Size: L</p>
+                            <button
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-hover text-text-secondary hover:bg-accent hover:text-white transition-all duration-200 add-to-cart-btn">
+                                <i class="ph ph-shopping-cart text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Wishlist Product 2 -->
+            </div>
+        </div>
+
+        <!-- Wishlist Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3">
+                <button
+                    class="w-full btn-professional text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3 add-all-to-cart-btn">
+                    <span>Add All to Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <!-- Cart Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>
+                </div>
+            </div>
+            <button id="close-cart"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Cart Products -->
+        <div class="flex-1 overflow-y-auto cart-products p-6">
+            <div class="space-y-4">
+                <!-- Cart Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4" data-product-id="1">
+                            <div>
+                                <p class="text-xs text-text-muted">Size: L</p>
+                                <a href="#" class="text-accent text-xs underline hover:no-underline mt-1 block">Edit
+                                    Order</a>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-minus">-</button>
+                                <span
+                                    class="w-8 text-center text-sm font-semibold quantity-display text-text-primary">1</span>
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Cart Product 2 and Cart Product 3 -->
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Shipping:</span>
+                    <span class="font-semibold text-green-600">FREE</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Tax:</span>
+                    <!-- Updated tax amount for single item -->
+                    <span class="font-semibold text-text-primary">30.00 MAD</span>
+                </div>
+                <div class="border-t border-border pt-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-text-primary font-playfair">Total:</span>
+                        <!-- Updated total amount for single item -->
+                        <span class="text-xl font-bold text-accent">229.99 MAD</span>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="w-full btn-whatsapp text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3">
+                <i class="ph ph-whatsapp-logo text-lg"></i>
+                <span>Buy Now</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== DOM ELEMENT REFERENCES =====
+        const elements = {
+            // Mobile Menu
+            mobileMenuBtn: document.getElementById('mobile-menu-btn'),
+            mobileMenu: document.getElementById('mobile-menu'),
+            closeMobileMenu: document.getElementById('close-mobile-menu'),
+
+            // Cart
+            cartBtn: document.getElementById('cart-btn'),
+            cartSidebar: document.getElementById('cart-sidebar'),
+            closeCart: document.getElementById('close-cart'),
+
+            // Wishlist
+            wishlistBtn: document.getElementById('wishlist-btn'),
+            wishlistSidebar: document.getElementById('wishlist-sidebar'),
+            closeWishlist: document.getElementById('close-wishlist'),
+
+            // Search
+            desktopSearchBtn: document.getElementById('desktop-search-btn'),
+            fullScreenSearch: document.getElementById('full-screen-search'),
+            fullScreenCloseSearch: document.getElementById('full-screen-close-search'),
+            fullScreenSearchInput: document.querySelector('.full-screen-search-input'),
+
+            // Dropdowns
+            currencyDropdownBtn: document.getElementById('currency-dropdown-btn'),
+            currencyDropdownMenu: document.getElementById('currency-dropdown-menu'),
+            selectedCurrencySpan: document.getElementById('selected-currency'),
+            currencyOptions: document.querySelectorAll('.currency-option'),
+            currencyChevron: document.getElementById('currency-chevron'),
+
+            languageDropdownBtn: document.getElementById('language-dropdown-btn'),
+            languageDropdownMenu: document.getElementById('language-dropdown-menu'),
+            selectedLanguageSpan: document.getElementById('selected-language'),
+            languageOptions: document.querySelectorAll('.language-option'),
+            languageChevron: document.getElementById('language-chevron'),
+            languageFlagIcon: document.getElementById('language-flag-icon'),
+
+            authDropdownBtn: document.getElementById('auth-dropdown-btn'),
+            authDropdownMenu: document.getElementById('auth-dropdown-menu'),
+
+            // Utility
+            overlay: document.getElementById('overlay'),
+            body: document.body,
+            header: document.querySelector('header')
+        };
+
+        // ===== UTILITY FUNCTIONS =====
+        function closeAllMenus() {
+            // Close all menus and sidebars
+            elements.mobileMenu.classList.remove('active');
+            elements.cartSidebar.classList.remove('active');
+            elements.wishlistSidebar.classList.remove('active');
+            elements.fullScreenSearch.classList.remove('active');
+            elements.overlay.classList.remove('active');
+
+            // Restore body scroll
+            elements.body.classList.remove('no-scroll');
+            elements.body.style.overflow = '';
+
+            // Close dropdowns and reset chevrons
+            closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+            closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
+            closeDropdown(elements.authDropdownMenu);
+        }
+
+        function closeDropdown(menu, chevron = null) {
+            menu.classList.add('opacity-0', 'scale-95', 'invisible');
+            menu.classList.remove('opacity-100', 'scale-100', 'visible');
+            if (chevron) {
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        function openDropdown(menu, chevron = null) {
+            closeAllMenus();
+            menu.classList.remove('opacity-0', 'scale-95', 'invisible');
+            menu.classList.add('opacity-100', 'scale-100', 'visible');
+            if (chevron) {
+                chevron.classList.add('rotate-180');
+            }
+        }
+
+        function animateItems(container, selector) {
+            const items = container.querySelectorAll(selector);
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.transition = 'all 0.3s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // ===== MENU FUNCTIONS =====
+        function openCart() {
+            closeAllMenus();
+            elements.cartSidebar.classList.add('active');
+            elements.overlay.classList.add('active');
+            elements.body.classList.add('no-scroll');
+            animateItems(elements.cartSidebar, '.product-card-professional');
+        }
+
+        function openWishlist() {
+            closeAllMenus();
+            elements.wishlistSidebar.classList.add('active');
+            elements.overlay.classList.add('active');
+            elements.body.classList.add('no-scroll');
+            animateItems(elements.wishlistSidebar, '.product-card-professional');
+        }
+
+        function openMobileMenu() {
+            closeAllMenus();
+            elements.mobileMenu.classList.add('active');
+            elements.overlay.classList.add('active');
+            elements.body.classList.add('no-scroll');
+        }
+
+        function openFullScreenSearch() {
+            closeAllMenus();
+            elements.fullScreenSearch.classList.add('active');
+            elements.body.classList.add('no-scroll');
+            elements.fullScreenSearchInput.focus();
+        }
+
+        function closeFullScreenSearch() {
+            elements.fullScreenSearch.classList.remove('active');
+            elements.body.classList.remove('no-scroll');
+            elements.body.style.overflow = '';
+        }
+
+        // ===== EVENT LISTENERS =====
+
+        // Cart Events
+        elements.cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openCart();
+        });
+
+        elements.closeCart.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllMenus();
+        });
+
+        // Wishlist Events
+        if (elements.wishlistBtn) {
+            elements.wishlistBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openWishlist();
+            });
+        }
+
+        elements.closeWishlist.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllMenus();
+        });
+
+        // Mobile Menu Events
+        elements.mobileMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openMobileMenu();
+        });
+
+        elements.closeMobileMenu.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllMenus();
+        });
+
+        // Search Events
+        elements.desktopSearchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openFullScreenSearch();
+        });
+
+        elements.fullScreenCloseSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeFullScreenSearch();
+        });
+
+        // Dropdown Events
+        elements.currencyDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (elements.currencyDropdownMenu.classList.contains('visible')) {
+                closeAllMenus();
+            } else {
+                openDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+            }
+        });
+
+        elements.languageDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (elements.languageDropdownMenu.classList.contains('visible')) {
+                closeAllMenus();
+            } else {
+                openDropdown(elements.languageDropdownMenu, elements.languageChevron);
+            }
+        });
+
+        elements.authDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (elements.authDropdownMenu.classList.contains('visible')) {
+                closeAllMenus();
+            } else {
+                openDropdown(elements.authDropdownMenu);
+            }
+        });
+
+        // Overlay Events
+        elements.overlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllMenus();
+        });
+
+        // Prevent sidebar content clicks from closing
+        [elements.cartSidebar, elements.wishlistSidebar, elements.mobileMenu].forEach(element => {
+            element.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
+        // Full-screen search events
+        elements.fullScreenSearch.querySelector('.full-screen-search-content').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        elements.fullScreenSearch.addEventListener('click', (e) => {
+            if (e.target === elements.fullScreenSearch) {
+                closeFullScreenSearch();
+            }
+        });
+
+        // ===== DROPDOWN FUNCTIONALITY =====
+
+        // Currency Selection
+        elements.currencyOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                elements.selectedCurrencySpan.textContent = option.dataset.currency;
+
+                // Update checkmarks
+                elements.currencyOptions.forEach(opt => {
+                    const check = opt.querySelector('.selected-check');
+                    if (check) check.style.display = 'none';
+                });
+
+                const selectedCheck = option.querySelector('.selected-check');
+                if (selectedCheck) selectedCheck.style.display = 'block';
+
+                closeAllMenus();
+            });
+        });
+
+        // Language Selection
+        function changeLanguage(lang, flagUrl, name) {
+            elements.selectedLanguageSpan.textContent = lang.toUpperCase();
+            if (elements.languageFlagIcon) {
+                elements.languageFlagIcon.src = flagUrl;
+                elements.languageFlagIcon.alt = `${name} Flag`;
+            }
+
+            // Remove existing checkmarks
+            elements.languageOptions.forEach(opt => {
+                const checkIcon = opt.querySelector('.selected-check');
+                if (checkIcon) {
+                    checkIcon.remove();
+                }
+            });
+
+            // Add checkmark to selected option
+            const selectedOption = document.querySelector(`.language-option[data-lang="${lang}"]`);
+            if (selectedOption) {
+                selectedOption.innerHTML += '<i class="ph ph-check ml-auto text-accent selected-check"></i>';
+            }
+
+            closeAllMenus();
+            document.documentElement.lang = lang.toLowerCase();
+        }
+
+        elements.languageOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                const flagUrl = option.dataset.flag;
+                const name = option.querySelector('span')?.textContent || lang;
+                changeLanguage(lang, flagUrl, name);
+            });
+        });
+
+        // ===== QUANTITY CONTROLS =====
+        document.querySelectorAll('.quantity-minus').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                const quantityDisplay = event.target.nextElementSibling;
+                let currentQuantity = parseInt(quantityDisplay.textContent);
+                if (currentQuantity > 1) {
+                    currentQuantity--;
+                    quantityDisplay.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        quantityDisplay.textContent = currentQuantity;
+                        quantityDisplay.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+
+        document.querySelectorAll('.quantity-plus').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                const quantityDisplay = event.target.previousElementSibling;
+                let currentQuantity = parseInt(quantityDisplay.textContent);
+                currentQuantity++;
+                quantityDisplay.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    quantityDisplay.textContent = currentQuantity;
+                    quantityDisplay.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // ===== SCROLL BEHAVIOR =====
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                elements.header.style.transform = 'translateY(-100%)';
+            } else {
+                elements.header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // ===== GLOBAL EVENT LISTENERS =====
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllMenus();
+            }
+        });
+
+        // Responsive Behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeAllMenus();
+            }
+        });
+
+        // Click Outside Dropdowns
+        document.addEventListener('click', (e) => {
+            // Close currency dropdown if click is outside
+            if (!elements.currencyDropdownBtn.contains(e.target) && !elements.currencyDropdownMenu.contains(e.target)) {
+                closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+            }
+
+            // Close language dropdown if click is outside
+            if (!elements.languageDropdownBtn.contains(e.target) && !elements.languageDropdownMenu.contains(e.target)) {
+                closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
+            }
+
+            // Close auth dropdown if click is outside
+            if (!elements.authDropdownBtn.contains(e.target) && !elements.authDropdownMenu.contains(e.target)) {
+                closeDropdown(elements.authDropdownMenu);
+            }
+        });
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize language display
+            const initialSelectedLangOption = document.querySelector('.language-option .selected-check')?.closest('.language-option');
+            if (initialSelectedLangOption) {
+                const lang = initialSelectedLangOption.dataset.lang;
+                const flagUrl = initialSelectedLangOption.dataset.flag;
+                const name = initialSelectedLangOption.querySelector('span')?.textContent || lang;
+                elements.selectedLanguageSpan.textContent = lang.toUpperCase();
+                if (elements.languageFlagIcon) {
+                    elements.languageFlagIcon.src = flagUrl;
+                    elements.languageFlagIcon.alt = `${name} Flag`;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

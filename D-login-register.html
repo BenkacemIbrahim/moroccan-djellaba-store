@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | JELLABTI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght%40400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0f172a',
+                            light: '#1e293b',
+                            dark: '#020617'
+                        },
+                        accent: {
+                            DEFAULT: '#C8A95A',
+                            light: '#d4b882',
+                            dark: '#b8965a'
+                        },
+                        surface: {
+                            DEFAULT: '#ffffff',
+                            elevated: '#f8fafc',
+                            hover: '#f1f5f9'
+                        },
+                        border: {
+                            DEFAULT: '#e2e8f0',
+                            light: '#f1f5f9'
+                        },
+                        text: {
+                            primary: '#0f172a',
+                            secondary: '#475569',
+                            muted: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        playfair: ['"Playfair Display"', 'serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'scale-in': 'scaleIn 0.2s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'modal-in': 'modalIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        modalIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            overflow-x: hidden;
+            /* Ensure no horizontal scrollbar on html */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            /* Changed from 100vw to 100% */
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            /* Keep this for good measure */
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C8A95A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4b882;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .sign-in-container {
+            left: 0;
+            z-index: 2;
+            opacity: 1;
+        }
+
+        .sign-up-container {
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .overlay {
+            background: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Aug%203%2C%202025%2C%2007_41_33%20PM-UuOXR8kGtBWLrxZOGfAY2MJWWLxzmu.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center -15px;
+            /* Adjusted to move the image down */
+            color: #FFFFFF;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-left {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 201;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            color: #475569;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .back-to-home:hover {
+            transform: translateX(-50%) translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+            color: #C8A95A;
+        }
+
+        .input-field {
+            position: relative;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            /* Further reduced margin */
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 10px 14px;
+            /* Further reduced padding */
+            border: 2px solid #f1f5f9;
+            border-radius: 0;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            /* Reduced font size */
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+        }
+
+        .input-field input:focus {
+            border-color: #C8A95A;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(200, 169, 90, 0.1);
+        }
+
+        .input-field input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Removed input icon styles */
+        .input-field i:not(.password-toggle) {
+            display: none;
+        }
+
+        .password-toggle {
+            display: none;
+            /* Removed password toggle */
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            /* Reduced font size */
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+            /* Reduced margin */
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            /* Reduced gap */
+            padding: 10px 16px;
+            /* Reduced padding */
+            border: 2px solid #f1f5f9;
+            border-radius: 0;
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            font-size: 13px;
+            /* Reduced font size */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 8px;
+            /* Reduced margin */
+        }
+
+        .social-btn:hover {
+            border-color: #e2e8f0;
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
+
+        .social-btn i {
+            font-size: 15px;
+            /* Reduced font size */
+        }
+
+        .google-btn:hover {
+            border-color: #ea4335;
+            color: #ea4335;
+        }
+
+        .form-button {
+            background: linear-gradient(135deg, #C8A95A, #d4b882);
+            border: 1px solid rgba(200, 169, 90, 0.3);
+            box-shadow:
+                0 4px 15px rgba(200, 169, 90, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            font-weight: 600;
+            padding: 12px 18px;
+            /* Reduced padding */
+            border-radius: 0;
+            width: 100%;
+            cursor: pointer;
+            font-size: 14px;
+            /* Reduced font size */
+        }
+
+        .form-button:hover {
+            background: linear-gradient(135deg, #d4b882, #C8A95A);
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 25px rgba(200, 169, 90, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .forgot-password {
+            color: #C8A95A;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            /* Reduced font size */
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #b8965a;
+            text-decoration: underline;
+        }
+
+        .overlay-button {
+            background: transparent;
+            border: 2px solid #f1f5f9;
+            color: #FFFFFF;
+            font-weight: 600;
+            padding: 12px 18px;
+            /* Reduced padding */
+            border-radius: 0;
+            width: 100%;
+            cursor: pointer;
+            font-size: 14px;
+            /* Reduced font size */
+            transition: all 0.3s ease;
+        }
+
+        .overlay-button:hover {
+            border-color: #FFFFFF;
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Removed error message styles */
+        .error-message {
+            display: none;
+        }
+
+        .input-field.error input {
+            border-color: #f1f5f9;
+            /* Reset border color */
+            box-shadow: none;
+            /* Reset box shadow */
+        }
+
+        .input-field.error i:not(.password-toggle) {
+            display: none;
+            /* Ensure icons remain hidden */
+        }
+
+        .auth-divider {
+            position: relative;
+            text-align: center;
+            margin: 16px 0;
+            /* Reduced margin */
+        }
+
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+        }
+
+        .auth-divider span {
+            background: #f8fafc;
+            padding: 0 10px;
+            /* Reduced padding */
+            color: #64748b;
+            font-size: 12px;
+            /* Reduced font size */
+            font-weight: 500;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Reduced gap */
+            margin: 12px 0;
+            /* Reduced margin */
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 15px;
+            /* Slightly reduced size */
+            height: 15px;
+            /* Slightly reduced size */
+            accent-color: #C8A95A;
+            cursor: pointer;
+        }
+
+        .checkbox-container label {
+            color: #64748b;
+            font-size: 12px;
+            /* Reduced font size */
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .checkbox-container a {
+            color: #C8A95A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-container a:hover {
+            text-decoration: underline;
+        }
+
+        .mobile-toggle {
+            display: none;
+            width: 100%;
+            padding-top: 0.75rem;
+            /* Reduced padding */
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .mobile-toggle p {
+            font-size: 12px;
+            /* Reduced font size */
+        }
+
+        .mobile-toggle button {
+            color: #C8A95A;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            /* Reduced font size */
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-toggle button:hover {
+            color: #b8965a;
+        }
+
+        .back-to-home-mobile {
+            display: none;
+            /* Hidden by default, only shown in media query */
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 201;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            align-items: center;
+            color: #475569;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .back-to-home-mobile:hover {
+            transform: translateX(-50%) translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+            color: #C8A95A;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                height: auto !important;
+                min-height: 600px;
+                margin: 1rem;
+                width: calc(100% - 2rem) !important;
+                max-width: 100% !important;
+            }
+
+            /* Adjusted height for sign-up form on mobile */
+            .container.right-panel-active {
+                min-height: 700px;
+                /* Reduced height for sign-up form */
+            }
+
+            .sign-in-container,
+            .sign-up-container {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                transform: none;
+            }
+
+            .sign-up-container {
+                display: none;
+            }
+
+            .container.right-panel-active .sign-in-container {
+                display: none;
+                transform: none;
+            }
+
+            .container.right-panel-active .sign-up-container {
+                display: block;
+                opacity: 1;
+                transform: none;
+            }
+
+            .overlay-container {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block !important;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .back-to-home {
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            form {
+                padding: 1.5rem !important;
+            }
+
+            .form-title {
+                font-size: 1.75rem !important;
+            }
+
+            .social-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+
+            .input-field input {
+                padding: 0.75rem 1rem !important;
+                font-size: 1rem !important;
+            }
+
+            .form-button {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 0.5rem;
+                width: calc(100% - 1rem) !important;
+                min-height: 550px;
+            }
+
+            /* Ensure the taller height is maintained or adjusted for smaller mobiles */
+            .container.right-panel-active {
+                min-height: 700px;
+                /* Keep or adjust as needed for very small screens */
+            }
+
+            form {
+                padding: 1rem !important;
+            }
+
+            .form-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .social-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .input-field input {
+                padding: 0.6rem 0.8rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            .form-button {
+                margin-top: 1rem !important;
+                padding: 0.6rem 1.2rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            .back-to-home {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(100);
+                opacity: 0;
+            }
+        }
+
+        .mobile-toggle button {
+            text-decoration: none !important;
+        }
+
+        .mobile-toggle button:hover {
+            text-decoration: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .back-to-home-mobile {
+                display: flex;
+            }
+
+            .overlay-container .back-to-home {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <main class="flex-grow flex items-center justify-center py-10 px-4 bg-surface-elevated min-h-screen">
+        <div class="container relative w-full max-w-3xl h-auto min-h-[600px] overflow-hidden rounded-2xl bg-surface shadow-xl border border-border"
+            id="container">
+
+            <div class="form-container sign-up-container bg-surface/98 backdrop-blur-sm">
+                <form action="#" class="flex flex-col items-center justify-center p-8 h-full" id="signupForm"
+                    novalidate>
+                    <h1 class="form-title text-text-primary mb-4">Create Account</h1>
+                    <button class="social-btn google-btn mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48"
+                            viewBox="0 0 48 48" class="w-4 h-4 flex-shrink-0">
+                            <path fill="#FFC107"
+                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z">
+                            </path>
+                            <path fill="#FF3D00"
+                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z">
+                            </path>
+                            <path fill="#4CAF50"
+                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z">
+                            </path>
+                            <path fill="#1976D2"
+                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z">
+                            </path>
+                        </svg>
+                        <span>Sign up with Google</span>
+                    </button>
+                    <div class="auth-divider w-full">
+                        <span>or create account with email</span>
+                    </div>
+                    <div class="w-full space-y-3 mt-3">
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Username" name="username" required class="w-full" />
+                            </div>
+                        </div>
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="email" placeholder="Email Address" name="email" required class="w-full" />
+                            </div>
+                        </div>
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="password" placeholder="Password" id="signupPassword" name="password"
+                                    required class="w-full" />
+                            </div>
+                        </div>
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="password" placeholder="Confirm Password" id="signupConfirmPassword"
+                                    name="confirmPassword" required class="w-full" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox-container w-full text-left mt-3 mb-3">
+                        <input type="checkbox" id="terms-agreement" required>
+                        <label for="terms-agreement">
+                            I agree to the <a href="#" class="text-accent hover:text-accent-dark">Terms of Service</a>
+                            and <a href="#" class="text-accent hover:text-accent-dark">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <div class="checkbox-container w-full text-left mb-4">
+                        <input type="checkbox" id="newsletter-signup">
+                        <label for="newsletter-signup">
+                            Subscribe to our newsletter for exclusive offers and updates
+                        </label>
+                    </div>
+                    <button type="submit" class="form-button mt-4">
+                        Create Account
+                    </button>
+                    <div class="mobile-toggle hidden mt-4">
+                        <p class="text-text-muted">Already have an account? <button type="button" id="mobileSignIn"
+                                class="text-accent font-bold hover:underline">Sign In</button></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container sign-in-container bg-surface/98 backdrop-blur-sm">
+                <form action="#" class="flex flex-col items-center justify-center p-8 h-full" id="signinForm"
+                    novalidate>
+                    <h1 class="form-title text-text-primary mb-4">Welcome Back!</h1>
+                    <button class="social-btn google-btn mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48"
+                            viewBox="0 0 48 48" class="w-4 h-4 flex-shrink-0">
+                            <path fill="#FFC107"
+                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z">
+                            </path>
+                            <path fill="#FF3D00"
+                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z">
+                            </path>
+                            <path fill="#4CAF50"
+                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z">
+                            </path>
+                            <path fill="#1976D2"
+                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z">
+                            </path>
+                        </svg>
+                        <span>Sign in with Google</span>
+                    </button>
+                    <div class="auth-divider w-full">
+                        <span>or sign in with email</span>
+                    </div>
+                    <div class="w-full space-y-3 mt-3">
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="email" placeholder="Email Address" name="email" required class="w-full" />
+                            </div>
+                        </div>
+                        <div class="relative input-field">
+                            <div class="input-wrapper">
+                                <input type="password" placeholder="Password" id="signinPassword" name="password"
+                                    required class="w-full" />
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#"
+                        class="forgot-password text-text-muted hover:text-accent mt-3 transition-colors duration-300">Forgot
+                        password?</a>
+                    <button type="submit" class="form-button mt-4">
+                        Sign In
+                    </button>
+                    <div class="mobile-toggle hidden mt-4">
+                        <p class="text-text-muted">Don't have an account? <button type="button" id="mobileSignUp"
+                                class="text-accent font-bold hover:underline">Create an account</button></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <a href="#"
+                    class="back-to-home bg-surface/90 hover:bg-surface text-text-secondary font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center border border-border shadow-lg">
+                    <i class="fas fa-home mr-2"></i>
+                    <span>Home</span>
+                </a>
+
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1 class="text-3xl font-bold mb-3 font-playfair">Welcome Back!</h1>
+                        <p class="mb-5 text-lg">To keep connected with us, please login with your personal info</p>
+                        <button class="overlay-button" id="signIn">
+                            Sign In
+                        </button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1 class="text-3xl font-bold mb-3 font-playfair">Hello, Friend!</h1>
+                        <p class="mb-5 text-lg">Enter your personal details and start your journey with us</p>
+                        <button class="overlay-button" id="signUp">
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="w-full text-center py-4 text-text-muted text-sm">
+        <p>© 2025 JELLABTI. All rights reserved</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('container');
+            const signUpButton = document.getElementById('signUp');
+            const signInButton = document.getElementById('signIn');
+            const mobileSignUpButton = document.getElementById('mobileSignUp');
+            const mobileSignInButton = document.getElementById('mobileSignIn');
+            const signUpContainer = document.querySelector('.sign-up-container');
+            const signInContainer = document.querySelector('.sign-in-container');
+            const backToHomeButton = document.querySelector('.back-to-home');
+            const signinForm = document.getElementById('signinForm');
+            const signupForm = document.getElementById('signupForm');
+            const signupPassword = document.getElementById('signupPassword');
+            const signupConfirmPassword = document.getElementById('signupConfirmPassword');
+            const termsAgreementCheckbox = document.getElementById('terms-agreement');
+
+            function resetFormFields() {
+                document.querySelectorAll('.sign-in-container input, .sign-up-container input').forEach(input => {
+                    input.value = '';
+                });
+                if (termsAgreementCheckbox) {
+                    termsAgreementCheckbox.checked = false;
+                }
+                const newsletterCheckbox = document.getElementById('newsletter-signup');
+                if (newsletterCheckbox) {
+                    newsletterCheckbox.checked = false;
+                }
+            }
+
+            function checkMobileView() {
+                if (window.innerWidth <= 768) {
+                    document.querySelectorAll('.mobile-toggle').forEach(toggle => {
+                        toggle.style.display = 'block';
+                    });
+
+                    if (container.classList.contains('right-panel-active')) {
+                        signInContainer.style.display = 'none';
+                        signUpContainer.style.display = 'block';
+                    } else {
+                        signInContainer.style.display = 'block';
+                        signUpContainer.style.display = 'none';
+                    }
+
+                    if (backToHomeButton) {
+                        backToHomeButton.style.position = 'fixed';
+                    }
+                } else {
+                    document.querySelectorAll('.mobile-toggle').forEach(toggle => {
+                        toggle.style.display = 'none';
+                    });
+
+                    signInContainer.style.display = 'block';
+                    signUpContainer.style.display = 'block';
+
+                    if (backToHomeButton) {
+                        backToHomeButton.style.position = 'absolute';
+                    }
+                }
+            }
+
+            checkMobileView();
+
+            signUpButton.addEventListener('click', () => {
+                container.classList.add('right-panel-active');
+                checkMobileView();
+                resetFormFields();
+            });
+
+            signInButton.addEventListener('click', () => {
+                container.classList.remove('right-panel-active');
+                checkMobileView();
+                resetFormFields();
+            });
+
+            if (mobileSignUpButton) {
+                mobileSignUpButton.addEventListener('click', () => {
+                    container.classList.add('right-panel-active');
+                    signInContainer.style.display = 'none';
+                    signUpContainer.style.display = 'block';
+                    resetFormFields();
+                });
+            }
+
+            if (mobileSignInButton) {
+                mobileSignInButton.addEventListener('click', () => {
+                    container.classList.remove('right-panel-active');
+                    signUpContainer.style.display = 'none';
+                    signInContainer.style.display = 'block';
+                    resetFormFields();
+                });
+            }
+
+            window.addEventListener('resize', checkMobileView);
+
+            signinForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = this.querySelector('input[name="email"]').value;
+                const password = this.querySelector('input[name="password"]').value;
+
+                if (!email || !password) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                console.log('Login attempt:', { email, password });
+                alert('Login successful! (This is a demo)');
+                // In a real application, you would send this data to your server
+                // and handle the response (e.g., redirect, show error message).
+            });
+
+            signupForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const username = this.querySelector('input[name="username"]').value;
+                const email = this.querySelector('input[name="email"]').value;
+                const password = signupPassword.value;
+                const confirmPassword = signupConfirmPassword.value;
+                const agreeToTerms = termsAgreementCheckbox.checked;
+                const subscribeNewsletter = document.getElementById('newsletter-signup').checked;
+
+                if (!username || !email || !password || !confirmPassword) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                if (!agreeToTerms) {
+                    alert('Please agree to the Terms of Service and Privacy Policy.');
+                    return;
+                }
+
+                console.log('Signup attempt:', { username, email, password, agreeToTerms, subscribeNewsletter });
+                alert('Account created successfully! (This is a demo)');
+                // In a real application, you would send this data to your server
+                // and handle the response (e.g., redirect, show error message).
+            });
+
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('Social login clicked');
+                    alert('Social login would be implemented here');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

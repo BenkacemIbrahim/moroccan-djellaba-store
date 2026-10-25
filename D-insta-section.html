@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Post Section</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom styles for Lucide icons */
+        .lucide {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Skeleton effect (static gray) */
+        .skeleton-placeholder {
+            background-color: #e0e0e0;
+            /* Solid gray for static skeleton */
+        }
+
+        /* Instagram-like gradient border for profile picture */
+        .instagram-gradient-border {
+            background-image: linear-gradient(to top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+        }
+
+        /* Hide scrollbar for carousel but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* FIXED: Disable touch scrolling for post cards carousel */
+        .posts-carousel-no-touch {
+            touch-action: none;
+            -webkit-overflow-scrolling: auto;
+        }
+
+        /* FIXED: Enable touch scrolling for image carousel on mobile only */
+        .image-carousel-mobile-touch {
+            touch-action: pan-x;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<!-- Changed body background to a slightly different gray for contrast -->
+
+<body class="bg-neutral-50 min-h-screen py-8 font-sans">
+    <!-- Main container now uses grid for large screens, and wider max-width -->
+    <main class="container mx-auto md:px-4 lg:max-w-6xl xl:max-w-7xl lg:grid lg:grid-cols-3 lg:gap-8">
+
+        <!-- Left Sidebar Post - Hidden on small/medium screens, visible on large -->
+        <div class="hidden lg:block">
+            <div
+                class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50">
+                <!-- Skeleton Loader (initially visible) -->
+                <div class="skeleton-loader">
+                    <div class="flex items-center p-3 border-b border-gray-200">
+                        <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                        <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                        <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                    </div>
+                </div>
+                <!-- Actual Content (initially hidden) -->
+                <div class="actual-content hidden">
+                    <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                    alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                            </div>
+                            <a href="https://www.instagram.com/user_alpha/" target="_blank" rel="noopener noreferrer"
+                                class="hover:underline">
+                                <span class="font-semibold text-sm">user_alpha</span>
+                            </a>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                    </div>
+                    <div
+                        class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                        <img src="https://i.pinimg.com/1200x/80/16/37/801637b8362aff1752be2f011040eead.jpg"
+                            alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        <img src="https://i.pinimg.com/736x/0c/85/f3/0c85f36e973e37c903ab1f420e64f7df.jpg"
+                            alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    </div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                data-likes="12345"></i>
+                            <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-sm caption-text">
+                            <span class="font-semibold">user_alpha</span> A beautiful sunset view! #sunset #nature
+                        </p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <p class="text-xs text-gray-400 uppercase">1 day ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Instagram Post Container - Spans middle column on large screens, hidden on small -->
+        <div
+            class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50 lg:col-span-1 hidden lg:block">
+
+            <!-- Skeleton Loader (initially visible) -->
+            <div class="skeleton-loader">
+                <div class="flex items-center p-3 border-b border-gray-200">
+                    <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                    <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                    <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                <div class="flex items-center justify-between p-3">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="px-3 pb-2">
+                    <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                    <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                    <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="px-3 pb-3">
+                    <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                </div>
+            </div>
+
+            <!-- Actual Content (initially hidden) -->
+            <div class="actual-content hidden">
+                <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                            <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                        </div>
+                        <a href="https://www.instagram.com/website-name123/" target="_blank" rel="noopener noreferrer"
+                            class="hover:underline">
+                            <span class="font-semibold text-sm">website-name123</span>
+                        </a>
+                    </div>
+                    <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                </div>
+                <div
+                    class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                    <img src="https://i.pinimg.com/1200x/37/5e/0d/375e0d6a1c3bf852d14e4079541d7877.jpg"
+                        alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    <img src="https://i.pinimg.com/1200x/80/3d/05/803d0552c3f791cfaa4b89ea3c2f13aa.jpg"
+                        alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    <img src="https://i.pinimg.com/1200x/5e/ee/c8/5eeec84d92b2251461c79d0530fabe28.jpg"
+                        alt="Post Image 3" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                </div>
+                <div class="flex items-center justify-between p-3">
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                            data-likes="799234"></i>
+                        <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="text-sm caption-text">
+                        <span class="font-semibold">websit-name123</span> Exploring the beautiful mountains! What an
+                        amazing view. #instagram #ducky #websitename123
+                    </p>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <p class="text-xs text-gray-400 uppercase">2 hours ago</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar Post - Hidden on small/medium screens, visible on large -->
+        <div class="hidden lg:block">
+            <div
+                class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50">
+                <!-- Skeleton Loader (initially visible) -->
+                <div class="skeleton-loader">
+                    <div class="flex items-center p-3 border-b border-gray-200">
+                        <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                        <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                        <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                    </div>
+                </div>
+                <!-- Actual Content (initially hidden) -->
+                <div class="actual-content hidden">
+                    <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                    alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                            </div>
+                            <a href="https://www.instagram.com/travel_explorer/" target="_blank"
+                                rel="noopener noreferrer" class="hover:underline">
+                                <span class="font-semibold text-sm">travel_explorer</span>
+                            </a>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                    </div>
+                    <div
+                        class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                        <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                            alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        <img src="https://i.pinimg.com/736x/d8/67/4a/d8674ac3c138f6cb3113fa3c15fac13e.jpg"
+                            alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    </div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                data-likes="56789"></i>
+                            <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-sm caption-text">
+                            <span class="font-semibold">travel_explorer</span> Adventures await! #travel #explore
+                        </p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <p class="text-xs text-gray-400 uppercase">3 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Small Screen Post Carousel - 3 cards only, NO touch scrolling for cards -->
+        <div class="block lg:hidden relative w-full px-4">
+            <div id="small-screen-post-carousel"
+                class="posts-carousel-no-touch overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar py-4 space-x-4">
+
+                <!-- Card 1: Main Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/website-name123/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">website-name123</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/1200x/37/5e/0d/375e0d6a1c3bf852d14e4079541d7877.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/1200x/80/3d/05/803d0552c3f791cfaa4b89ea3c2f13aa.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/1200x/5e/ee/c8/5eeec84d92b2251461c79d0530fabe28.jpg"
+                                alt="Post Image 3" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="799234"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">websit-name123</span> Exploring the beautiful mountains!
+                                What an amazing view. #instagram #ducky #websitename123
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">2 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Left Sidebar Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/user_alpha/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">user_alpha</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/736x/c2/9e/53/c29e531f38616aa93fafa4f5e73c16a8.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="12345"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">user_alpha</span> A beautiful sunset view! #sunset #nature
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Right Sidebar Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/travel_explorer/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">travel_explorer</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/736x/c2/9e/53/c29e531f38616aa93fafa4f5e73c16a8.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="56789"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">travel_explorer</span> Adventures await! #travel #explore
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">3 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons for Small Screen Carousel -->
+            <button id="carousel-left-btn"
+                class="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 ml-2">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button id="carousel-right-btn"
+                class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 mr-2">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons for all new icons
+            lucide.createIcons();
+
+            const allInstagramPosts = document.querySelectorAll('.instagram-post');
+
+            allInstagramPosts.forEach(instagramPost => {
+                const skeletonLoader = instagramPost.querySelector('.skeleton-loader');
+                const actualContent = instagramPost.querySelector('.actual-content');
+                const heartIcon = instagramPost.querySelector('.lucide-heart');
+                const likesCountSpan = instagramPost.querySelector('.likes-count');
+                const captionTextElement = instagramPost.querySelector('.caption-text');
+                const imageCarousel = instagramPost.querySelector('.image-carousel');
+                const carouselItems = Array.from(imageCarousel ? imageCarousel.querySelectorAll('.carousel-item') : []);
+
+                // Simulate loading time for the skeleton effect
+                setTimeout(() => {
+                    if (skeletonLoader) skeletonLoader.classList.add('hidden');
+                    if (actualContent) {
+                        actualContent.classList.remove('hidden');
+                        actualContent.classList.add('block');
+                    }
+
+                    // Initialize like functionality after content is visible
+                    if (heartIcon && likesCountSpan) {
+                        let isLiked = false;
+                        let initialLikes = parseInt(heartIcon.dataset.likes || '0');
+
+                        function formatNumber(num) {
+                            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        }
+
+                        likesCountSpan.textContent = formatNumber(initialLikes);
+
+                        heartIcon.addEventListener('click', () => {
+                            isLiked = !isLiked;
+
+                            if (isLiked) {
+                                heartIcon.classList.add('fill-red-500', 'text-red-500');
+                                heartIcon.classList.remove('text-gray-700');
+                                initialLikes++;
+                            } else {
+                                heartIcon.classList.remove('fill-red-500', 'text-red-500');
+                                heartIcon.classList.add('text-gray-700');
+                                initialLikes--;
+                            }
+                            likesCountSpan.textContent = formatNumber(initialLikes);
+                        });
+                    }
+
+                    // Hashtag styling: only change color of the word after '#'
+                    if (captionTextElement) {
+                        let captionHtml = captionTextElement.innerHTML;
+                        captionHtml = captionHtml.replace(/#(\w+)/g, '#<span class="text-blue-600 font-medium">$1</span>');
+                        captionTextElement.innerHTML = captionHtml;
+                    }
+
+                    // FIXED: Image carousel functionality - touch for mobile, auto-scroll for desktop
+                    if (imageCarousel && carouselItems.length > 1) {
+                        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+
+                        if (isMobile) {
+                            // FIXED: Touch support for image carousel on mobile ONLY
+                            let isScrolling = false;
+                            let startX = 0;
+                            let scrollLeft = 0;
+
+                            imageCarousel.addEventListener('touchstart', (e) => {
+                                isScrolling = true;
+                                startX = e.touches[0].pageX - imageCarousel.offsetLeft;
+                                scrollLeft = imageCarousel.scrollLeft;
+                                // IMPORTANT: Stop propagation to prevent card scrolling
+                                e.stopPropagation();
+                            });
+
+                            imageCarousel.addEventListener('touchmove', (e) => {
+                                if (!isScrolling) return;
+                                e.preventDefault();
+                                // IMPORTANT: Stop propagation to prevent card scrolling
+                                e.stopPropagation();
+                                const x = e.touches[0].pageX - imageCarousel.offsetLeft;
+                                const walk = (x - startX) * 1.5;
+                                imageCarousel.scrollLeft = scrollLeft - walk;
+                            });
+
+                            imageCarousel.addEventListener('touchend', (e) => {
+                                isScrolling = false;
+                                // IMPORTANT: Stop propagation to prevent card scrolling
+                                e.stopPropagation();
+                            });
+                        } else {
+                            // Auto-scroll for large screens only
+                            let autoScrollInterval;
+
+                            const startAutoScroll = () => {
+                                autoScrollInterval = setInterval(() => {
+                                    const currentScrollLeft = imageCarousel.scrollLeft;
+                                    const itemWidth = imageCarousel.clientWidth;
+                                    const maxScrollLeft = imageCarousel.scrollWidth - imageCarousel.clientWidth;
+
+                                    if (currentScrollLeft >= maxScrollLeft - 1) {
+                                        imageCarousel.scrollTo({ left: 0, behavior: 'smooth' });
+                                    } else {
+                                        imageCarousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                                    }
+                                }, 3000);
+                            };
+
+                            const stopAutoScroll = () => {
+                                if (autoScrollInterval) {
+                                    clearInterval(autoScrollInterval);
+                                }
+                            };
+
+                            startAutoScroll();
+                            imageCarousel.addEventListener('pointerdown', stopAutoScroll);
+                            imageCarousel.addEventListener('pointerup', () => setTimeout(startAutoScroll, 1000));
+                        }
+                    }
+
+                }, 2000); // 2 seconds loading time
+            });
+
+            // Post carousel navigation - ONLY buttons work, touch scrolling DISABLED
+            const smallScreenPostCarousel = document.getElementById('small-screen-post-carousel');
+            const carouselLeftBtn = document.getElementById('carousel-left-btn');
+            const carouselRightBtn = document.getElementById('carousel-right-btn');
+
+            if (smallScreenPostCarousel && carouselLeftBtn && carouselRightBtn) {
+                // Button navigation for post cards
+                carouselLeftBtn.addEventListener('click', () => {
+                    const itemWidth = smallScreenPostCarousel.clientWidth;
+                    smallScreenPostCarousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                });
+
+                carouselRightBtn.addEventListener('click', () => {
+                    const itemWidth = smallScreenPostCarousel.clientWidth;
+                    smallScreenPostCarousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                });
+
+                // FIXED: Completely disable touch scrolling for post cards
+                smallScreenPostCarousel.addEventListener('touchstart', (e) => {
+                    // Only prevent if the touch is not on an image carousel
+                    if (!e.target.closest('.image-carousel')) {
+                        e.preventDefault();
+                    }
+                });
+
+                smallScreenPostCarousel.addEventListener('touchmove', (e) => {
+                    // Only prevent if the touch is not on an image carousel
+                    if (!e.target.closest('.image-carousel')) {
+                        e.preventDefault();
+                    }
+                });
+
+                smallScreenPostCarousel.addEventListener('touchend', (e) => {
+                    // Only prevent if the touch is not on an image carousel
+                    if (!e.target.closest('.image-carousel')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

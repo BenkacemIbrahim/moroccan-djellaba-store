@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Section</title>
+    <!-- Link to Tailwind CSS CDN for simplicity. In a real project, you'd compile it. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the accordion effect */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .faq-answer.open {
+            opacity: 1;
+            margin-top: 0.5rem; /* mt-2 */
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item.open .chevron-icon {
+            transform: rotate(180deg);
+        }
+        /* Custom font for the title if not available in Tailwind defaults */
+        .font-serif-custom {
+            font-family: Georgia, serif; /* Example serif font */
+        }
+
+        /* Styles for lazy loading/delayed appearance */
+        .faq-item-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .faq-item-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen  py-12">
+
+    <!-- Container with no border-radius -->
+    <div class="bg-black text-white p-8 w-full">
+        <h2 class="text-5xl font-serif-custom text-white mb-12 tracking-wide text-center">
+            FAQS
+        </h2>
+        <!-- Inner div to center the questions and give them a max-width -->
+        <div class="w-full max-w-3xl mx-auto">
+            <!-- FAQ Item 1 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="0">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-1">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How long does it take to ship?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-1" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Shipping typically takes 3-5 business days for domestic orders and 7-14 business days for international orders.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="100">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-2">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How to track my order?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-2" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Once your order has shipped, you will receive an email with a tracking number. You can use this number on our website or the carrier's website to track your package.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="200">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-3">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How do I place a return or exchange?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-3" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Please visit our Returns & Exchanges page for detailed instructions and to initiate a return or exchange request.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="300">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How to change the delivery address and contact information?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-4" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">If your order has not yet shipped, please contact our customer support immediately to update your delivery address or contact information. Once shipped, changes may not be possible.</p>
+                </div>
+            </div>
+
+      
+
+          
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // Lazy load/fade-in effect for FAQ items
+            faqItems.forEach((item) => {
+                const delay = parseInt(item.dataset.delay || '0', 10);
+                setTimeout(() => {
+                    item.classList.remove('faq-item-hidden');
+                    item.classList.add('faq-item-visible');
+                }, 1000 + delay); // 1 second base delay + staggered delay
+            });
+
+            // Accordion functionality
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.closest('.faq-item');
+                    const answer = faqItem.querySelector('.faq-answer');
+                    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open FAQ items
+                    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+                        if (openItem !== faqItem) {
+                            const otherAnswer = openItem.querySelector('.faq-answer');
+                            openItem.classList.remove('open');
+                            otherAnswer.style.maxHeight = '0';
+                            otherAnswer.classList.remove('open');
+                            openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    // Toggle the clicked FAQ item
+                    if (isExpanded) {
+                        // Close the accordion
+                        answer.style.maxHeight = answer.scrollHeight + 'px'; // Set to current height before collapsing
+                        requestAnimationFrame(() => {
+                            answer.style.maxHeight = '0';
+                            answer.classList.remove('open');
+                        });
+                        faqItem.classList.remove('open');
+                        question.setAttribute('aria-expanded', 'false');
+                    } else {
+                        // Open the accordion
+                        answer.classList.add('open');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        faqItem.classList.add('open');
+                        question.setAttribute('aria-expanded', 'true');
+                        // Reset max-height after transition to allow content to grow if resized
+                        answer.addEventListener('transitionend', function handler() {
+                            if (answer.classList.contains('open')) {
+                                answer.style.maxHeight = 'none';
+                            }
+                            answer.removeEventListener('transitionend', handler);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+in the header : macking the mobile menu header in the same size as wishlist menu header

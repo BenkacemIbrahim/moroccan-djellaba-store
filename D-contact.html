@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Moroccan Djellaba Shop</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#0f172a',
+              light: '#1e293b',
+              dark: '#020617'
+            },
+            accent: {
+              DEFAULT: '#C8A95A', /* This is the gold from the header */
+              light: '#d4b882',
+              dark: '#b8965a'
+            },
+            gold: { /* Keeping this as it was in the header */
+              DEFAULT: '#f59e0b',
+              light: '#fbbf24'
+            },
+            surface: {
+              DEFAULT: '#ffffff',
+              elevated: '#f8fafc',
+              hover: '#f1f5f9'
+            },
+            border: {
+              DEFAULT: '#e2e8f0',
+              light: '#f1f5f9'
+            },
+            text: {
+              primary: '#0f172a',
+              secondary: '#475569',
+              muted: '#64748b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            playfair: ['"Playfair Display"', 'serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-down': 'slideDown 0.3s ease-out',
+            'scale-in': 'scaleIn 0.2s ease-out',
+            'shimmer': 'shimmer 2s linear infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideDown: {
+              '0%': { transform: 'translateY(-10px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Professional Color Palette from D-deatail-page.html */
+    :root {
+      --primary-navy: #0f172a;
+      --secondary-navy: #1e293b;
+      --darker-navy: #020617;
+      --accent-gold: #B8860B;
+      /* Main accent gold */
+      --light-gold: #DAA520;
+      --warm-gold: #CD853F;
+      --cream: #f5f1e8;
+      --warm-white: #ffffff;
+      --soft-gray: #f8fafc;
+      --light-gray: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --success-green: #10b981;
+      --error-red: #ef4444;
+      --shadow-light: rgba(15, 23, 42, 0.08);
+      --shadow-medium: rgba(15, 23, 42, 0.12);
+      --shadow-heavy: rgba(15, 23, 42, 0.16);
+      --gradient-primary: linear-gradient(135deg, #B8860B 0%, #CD853F 100%);
+      --gradient-secondary: linear-gradient(135deg, #f5f1e8 0%, #DAA520 100%);
+      --gradient-background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      --hover-gold: #DAA520;
+      --hover-shadow: rgba(184, 134, 11, 0.25);
+      /* WhatsApp Colors */
+      --whatsapp-green: #25D366;
+      --whatsapp-dark: #128C7E;
+      --whatsapp-light: #DCF8C6;
+      /* Scroll Design Colors (specific to D-detail-page) */
+      --primary-gold-scroll: #D4AF37;
+      --secondary-gold-scroll: #F4E4BC;
+      --accent-gold-dark-scroll: #B8941F;
+      --gradient-gold-scroll: linear-gradient(135deg, #c9a96e 0%, #D4AF37 50%, #B8941F 100%);
+    }
+
+    /* Body Background */
+    body {
+      background: var(--gradient-background);
+      font-family: 'Inter', sans-serif;
+      /* Keeping Inter as per original contact.html */
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--cream);
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(200, 169, 90, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-gold-scroll);
+      /* Using the specific scroll gradient */
+      border-radius: 12px;
+      border: 3px solid var(--cream);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(200, 169, 90, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-gold-scroll);
+      /* Using the specific scroll gold */
+      box-shadow: 0 0 25px rgba(200, 169, 90, 0.6);
+    }
+
+    /* Firefox Scrollbar */
+    html {
+      scrollbar-width: thick;
+      scrollbar-color: var(--accent-gold) var(--cream);
+    }
+
+    /* Hide scrollbar on mobile */
+    @media (max-width: 768px) {
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      html {
+        scrollbar-width: none;
+      }
+
+      body {
+        -ms-overflow-style: none;
+      }
+    }
+
+    /* Scroll Progress Bar */
+    .scroll-progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(200, 169, 90, 0.1);
+      z-index: 1001;
+    }
+
+    .scroll-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--gradient-gold-scroll);
+      /* Using the specific scroll gradient */
+      transition: width 0.1s ease;
+      box-shadow: 0 0 20px rgba(200, 169, 90, 0.8);
+    }
+
+    /* Professional Ocean Effect Button */
+    .ocean-effect {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--light-gold) 100%);
+      border: 2px solid var(--accent-gold);
+      color: var(--primary-navy);
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .ocean-effect::before,
+    .ocean-effect::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--darker-navy);
+      transform: translateX(-100%) translateY(100%);
+      transition: none;
+      z-index: 1;
+    }
+
+    .ocean-effect::before {
+      background: linear-gradient(45deg, var(--darker-navy) 0%, var(--primary-navy) 50%, var(--darker-navy) 100%);
+      border-radius: 50% 40% 60% 30%;
+    }
+
+    .ocean-effect::after {
+      background: linear-gradient(-45deg, var(--darker-navy) 0%, var(--primary-navy) 50%, var(--darker-navy) 100%);
+      border-radius: 40% 60% 30% 50%;
+    }
+
+    .ocean-effect .wave-layer {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, var(--darker-navy) 0%, var(--secondary-navy) 50%, var(--darker-navy) 100%);
+      border-radius: 60% 30% 50% 40%;
+      transform: translateX(-100%) translateY(100%);
+      transition: none;
+      z-index: 1;
+    }
+
+    .ocean-effect .fill-layer {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--darker-navy);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: none;
+      z-index: 0;
+    }
+
+    /* Ocean Wave Animations */
+    @keyframes oceanWave {
+      0% {
+        transform: translateX(-100%) translateY(100%);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-10%);
+      }
+
+      100% {
+        transform: translateX(0%) translateY(0%);
+      }
+    }
+
+    @keyframes oceanWave2 {
+      0% {
+        transform: translateX(-100%) translateY(100%) scaleY(0.8);
+      }
+
+      60% {
+        transform: translateX(-30%) translateY(-5%) scaleY(1.2);
+      }
+
+      100% {
+        transform: translateX(0%) translateY(0%) scaleY(1);
+      }
+    }
+
+    @keyframes oceanWave3 {
+      0% {
+        transform: translateX(-100%) translateY(100%) scaleY(0.6);
+      }
+
+      70% {
+        transform: translateX(-20%) translateY(-15%) scaleY(1.4);
+      }
+
+      100% {
+        transform: translateX(0%) translateY(0%) scaleY(1);
+      }
+    }
+
+    @keyframes fillSides {
+      0% {
+        transform: scaleX(0);
+      }
+
+      100% {
+        transform: scaleX(1);
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .ocean-effect:hover::before {
+        animation: oceanWave 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+
+      .ocean-effect:hover::after {
+        animation: oceanWave2 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 0.1s;
+      }
+
+      .ocean-effect:hover .wave-layer {
+        animation: oceanWave3 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 0.2s;
+      }
+
+      .ocean-effect:hover .fill-layer {
+        animation: fillSides 0.3s ease forwards;
+        animation-delay: 1.2s;
+      }
+
+      .ocean-effect:hover .button-text {
+        color: var(--accent-gold) !important;
+        transition: color 0.5s ease 0.4s;
+      }
+
+      .ocean-effect:hover {
+        border-color: var(--darker-navy);
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+      }
+    }
+
+    .ocean-effect>* {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Professional Text Colors */
+    .title-navy {
+      color: var(--primary-navy);
+    }
+
+    .subtitle-navy {
+      color: var(--text-secondary);
+    }
+
+    /* Changed to text-secondary for consistency */
+    .accent-text {
+      color: var(--accent-gold);
+    }
+
+    /* Form Styles */
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border-light);
+      /* Using border-light */
+      border-radius: 8px;
+      background: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+    }
+
+    .form-label {
+      position: absolute;
+      left: 1.25rem;
+      top: 1rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      background: white;
+      padding: 0 0.5rem;
+    }
+
+    .form-input:focus+.form-label,
+    .form-input:not(:placeholder-shown)+.form-label,
+    .form-textarea:focus+.form-label,
+    .form-textarea:not(:placeholder-shown)+.form-label {
+      top: -0.5rem;
+      left: 1rem;
+      font-size: 0.875rem;
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Success Message */
+    .success-message {
+      background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
+      /* Using success-green */
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .success-message.show {
+      display: flex;
+      animation: slideInFromBottom 0.5s ease;
+    }
+
+    @keyframes slideInFromBottom {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Contact Info Cards */
+    .contact-card {
+      background: linear-gradient(135deg, var(--warm-white) 0%, var(--soft-gray) 100%);
+      /* Using warm-white and soft-gray */
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .contact-card:hover {
+        border-color: var(--accent-gold);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px var(--shadow-medium);
+        /* Using shadow-medium */
+      }
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      /* Using gradient-primary */
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .contact-card:hover::before {
+        transform: scaleX(1);
+      }
+    }
+
+    /* FAQ Styles */
+    .faq-item {
+      background: var(--warm-white);
+      /* Using warm-white */
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .faq-item:hover {
+        border-color: var(--accent-gold);
+      }
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: var(--soft-gray);
+      /* Using soft-gray */
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      display: none;
+    }
+
+    .faq-answer.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    /* Social Media Icons */
+    .social-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .social-icon:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .social-whatsapp {
+      background: linear-gradient(135deg, var(--whatsapp-green), #22c55e);
+    }
+
+    /* Using whatsapp-green */
+    .social-instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+
+    .social-facebook {
+      background: linear-gradient(135deg, #1877F2, #0d6efd);
+    }
+
+    .social-tiktok {
+      background: linear-gradient(135deg, #000000, #1f2937);
+    }
+
+    /* Map Container */
+    .map-container {
+      height: 400px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--border-light);
+      background-image: url('https://i.pinimg.com/736x/9b/d9/a0/9bd9a0f0b49529376fb270b78474498d.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    .map-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.3) 0%, rgba(30, 41, 59, 0.4) 100%);
+    }
+
+    /* Business Hours */
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hours-item:last-child {
+      border-bottom: none;
+    }
+
+    .hours-day {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .hours-time {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .hours-closed {
+      color: var(--error-red);
+      /* Using error-red */
+      font-weight: 600;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .scroll-progress-container {
+        height: 3px;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+        /* Smaller font for inputs on mobile */
+      }
+
+      .form-label {
+        left: 1rem;
+        top: 0.875rem;
+        font-size: 0.8rem;
+        /* Smaller label font on mobile */
+      }
+
+      .form-input:focus+.form-label,
+      .form-input:not(:placeholder-shown)+.form-label,
+      .form-textarea:focus+.form-label,
+      .form-textarea:not(:placeholder-shown)+.form-label {
+        left: 0.75rem;
+        font-size: 0.75rem;
+        /* Smaller active label font on mobile */
+      }
+
+      .contact-card {
+        padding: 1.5rem;
+      }
+
+      .map-container {
+        height: 300px;
+      }
+
+      /* Adjust social icon size for smaller screens */
+      .social-icon {
+        width: 2.5rem;
+        /* Smaller width */
+        height: 2.5rem;
+        /* Smaller height */
+        font-size: 1rem;
+        /* Smaller icon font size */
+      }
+    }
+
+    /* Animation Classes */
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Professional gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-navy), var(--secondary-navy), var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-gradient-to-br from-surface-elevated via-surface to-surface-hover text-text-primary leading-relaxed antialiased min-h-screen">
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </div>
+
+  <!-- Header Section -->
+  <section class="bg-white relative py-12 lg:py-16 overflow-hidden animate-fade-in">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50"></div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="w-20 h-0.5 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full mx-auto mb-6"></div>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold title-navy font-playfair mb-6">
+          Get In <span class="accent-text">Touch</span>
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Information Cards -->
+  <section class="py-12 bg-gradient-to-br from-white via-gray-50 to-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- Phone Contact -->
+        <div class="contact-card text-center animate-slide-up">
+          <div
+            class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-accent to-accent-dark rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-phone text-lg sm:text-xl text-white"></i>
+          </div>
+          <h3 class="text-lg sm:text-xl font-bold title-navy mb-2">Call Us</h3>
+          <p class="text-sm sm:text-base text-text-secondary mb-3">Speak directly with our team</p>
+          <a href="tel:+212123456789"
+            class="text-accent-gold font-semibold hover:text-accent-dark transition-colors text-sm sm:text-base">
+            +212 123 456 789
+          </a>
+        </div>
+
+        <!-- Email Contact -->
+        <div class="contact-card text-center animate-slide-up" style="animation-delay: 0.1s;">
+          <div
+            class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-accent to-accent-dark rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-envelope text-lg sm:text-xl text-white"></i>
+          </div>
+          <h3 class="text-lg sm:text-xl font-bold title-navy mb-2">Email Us</h3>
+          <p class="text-sm sm:text-base text-text-secondary mb-3">Get detailed responses</p>
+          <a href="mailto:info@djellabashop.com"
+            class="text-accent-gold font-semibold hover:text-accent-dark transition-colors flex justify-center items-center break-all text-sm sm:text-base">
+            info@djellabashop.com
+          </a>
+        </div>
+
+        <!-- Live Chat Contact -->
+        <div class="contact-card text-center animate-slide-up" style="animation-delay: 0.2s;">
+          <div
+            class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-accent to-accent-dark rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-comments text-lg sm:text-xl text-white"></i>
+          </div>
+          <h3 class="text-lg sm:text-xl font-bold title-navy mb-2">Live Chat</h3>
+          <p class="text-sm sm:text-base text-text-secondary mb-3">Chat with us instantly</p>
+          <a href="#"
+            class="text-accent-gold font-semibold hover:text-accent-dark transition-colors text-sm sm:text-base"
+            onclick="alert('Live chat coming soon!')">
+            Start Chat Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form & Map Section -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Contact Form -->
+        <div class="animate-slide-up">
+          <div class="bg-white p-8 rounded-12 shadow-xl border border-gray-100">
+            <div class="mb-8">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-bold title-navy font-playfair mb-4">Send us a Message</h2>
+              <p class="subtitle-navy text-sm sm:text-base">Fill out the form below and we'll get back to you within 24
+                hours.</p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="success-message">
+              <i class="fas fa-check-circle text-xl"></i>
+              <span>Thank you! Your message has been sent successfully.</span>
+            </div>
+
+            <form id="contact-form" class="space-y-6">
+              <!-- Name Fields -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="form-group">
+                  <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" " required>
+                  <label for="firstName" class="form-label">First Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="lastName" name="lastName" class="form-input" placeholder=" " required>
+                  <label for="lastName" class="form-label">Last Name</label>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <input type="email" id="email" name="email" class="form-input" placeholder=" " required>
+                <label for="email" class="form-label">Email Address</label>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder=" ">
+                <label for="phone" class="form-label">Phone Number (Optional)</label>
+              </div>
+
+              <!-- Subject -->
+              <div class="form-group">
+                <select id="subject" name="subject" class="form-input" required>
+                  <option value="">Select a subject</option>
+                  <option value="product-inquiry">Product Inquiry</option>
+                  <option value="custom-order">Custom Order</option>
+                  <option value="size-consultation">Size Consultation</option>
+                  <option value="shipping">Shipping & Delivery</option>
+                  <option value="return">Returns & Exchanges</option>
+                  <option value="wholesale">Wholesale Inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+                <label for="subject" class="form-label">Subject</label>
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <textarea id="message" name="message" class="form-textarea" placeholder=" " required></textarea>
+                <label for="message" class="form-label">Your Message</label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit"
+                class="ocean-effect w-full py-3 sm:py-4 px-4 sm:px-6 font-semibold text-base sm:text-lg transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-opacity-30">
+                <div class="wave-layer"></div>
+                <div class="fill-layer"></div>
+                <span class="button-text relative z-10 flex items-center justify-center">
+                  <span id="button-text">Send Message</span>
+                  <i id="button-icon" class="fas fa-paper-plane ml-2"></i>
+                  <div id="button-loader" class="hidden ml-2">
+                    <div
+                      class="w-4 h-4 sm:w-5 sm:h-5 border-2 border-current border-t-transparent rounded-full animate-spin">
+                    </div>
+                  </div>
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Map & Business Info -->
+        <div class="space-y-8">
+          <!-- Map -->
+          <div class="animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="map-container">
+              <!-- Map overlay content can be added here if needed -->
+            </div>
+          </div>
+
+          <!-- Response Time -->
+          <div class="animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="bg-white p-6 rounded-12 shadow-lg border border-gray-100">
+              <h3 class="text-lg sm:text-xl font-semibold title-navy font-playfair mb-4">Our Response Time</h3>
+              <div class="space-y-2">
+                <div class="hours-item">
+                  <span class="hours-day text-sm sm:text-base">Email Inquiries</span>
+                  <span class="hours-time text-sm sm:text-base">Within 24 hours</span>
+                </div>
+                <div class="hours-item">
+                  <span class="hours-day text-sm sm:text-base">Live Chat</span>
+                  <span class="hours-time text-sm sm:text-base">Instant (during support hours)</span>
+                </div>
+                <div class="hours-item">
+                  <span class="hours-day text-sm sm:text-base">Social Media</span>
+                  <span class="hours-time text-sm sm:text-base">Within 12 hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why Choose Us -->
+          <div class="animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="bg-white p-6 rounded-12 shadow-lg border border-gray-100">
+              <h3 class="text-lg sm:text-xl font-semibold title-navy font-playfair mb-4">Why Choose Us?</h3>
+              <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <span class="subtitle-navy text-sm sm:text-base">Expert craftsmanship & authentic designs</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <span class="subtitle-navy text-sm sm:text-base">Fast response within 24 hours</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <span class="subtitle-navy text-sm sm:text-base">Custom sizing & personalization</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                  <span class="subtitle-navy text-sm sm:text-base">Worldwide shipping available</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media -->
+          <div class="animate-slide-up" style="animation-delay: 0.4s;">
+            <div class="bg-white p-6 rounded-12 shadow-lg border border-gray-100">
+              <h3 class="text-lg sm:text-xl font-semibold title-navy font-playfair mb-4">Follow Us</h3>
+              <div class="flex space-x-4">
+                <a href="#" class="social-icon social-whatsapp">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="social-icon social-instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon social-facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon social-tiktok">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-gradient-to-br from-white via-gray-50 to-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 animate-fade-in">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold title-navy font-playfair mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-sm sm:text-base subtitle-navy max-w-2xl mx-auto">
+          Quick answers to common questions about our djellabas and services
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item animate-slide-up">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base sm:text-lg font-semibold title-navy font-playfair text-left">How do I choose the
+                right size?</h3>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <p class="subtitle-navy text-sm sm:text-base">We provide detailed size charts for each product. You can also
+              contact us for
+              personalized sizing advice or request custom measurements for the perfect fit.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item animate-slide-up" style="animation-delay: 0.1s;">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base sm:text-lg font-semibold title-navy font-playfair text-left">Do you offer custom
+                designs?</h3>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <p class="subtitle-navy text-sm sm:text-base">Yes! We specialize in custom djellabas. Contact us with your
+              design ideas,
+              preferred colors, and measurements for a personalized quote.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item animate-slide-up" style="animation-delay: 0.2s;">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base sm:text-lg font-semibold title-navy font-playfair text-left">What are your shipping
+                options?</h3>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <p class="subtitle-navy text-sm sm:text-base">We offer worldwide shipping with tracking. Standard delivery
+              takes 7-14 business
+              days, while express shipping is available for 3-5 business days.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item animate-slide-up" style="animation-delay: 0.3s;">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base sm:text-lg font-semibold title-navy font-playfair text-left">What is your return
+                policy?</h3>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <p class="subtitle-navy text-sm sm:text-base">We offer a 30-day return policy for unworn items in original
+              condition. Custom
+              orders are final unless there's a manufacturing defect.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item animate-slide-up" style="animation-delay: 0.4s;">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base sm:text-lg font-semibold title-navy font-playfair text-left">Do you offer wholesale
+                pricing?</h3>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <p class="subtitle-navy text-sm sm:text-base">Yes, we offer competitive wholesale pricing for bulk orders.
+              Contact us with your
+              requirements for a custom quote and terms.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Scroll Progress Functionality
+    function updateScrollProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    }
+
+    // Contact Form Functionality
+    function initContactForm() {
+      const form = document.getElementById('contact-form');
+      const successMessage = document.getElementById('success-message');
+      const buttonText = document.getElementById('button-text');
+      const buttonIcon = document.getElementById('button-icon');
+      const buttonLoader = document.getElementById('button-loader');
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Show loading state
+        buttonText.textContent = 'Sending...';
+        buttonIcon.classList.add('hidden');
+        buttonLoader.classList.remove('hidden');
+        submitButton.disabled = true;
+
+        // Simulate form submission
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Show success message
+        successMessage.classList.add('show');
+
+        // Reset form
+        form.reset();
+
+        // Reset button state
+        buttonText.textContent = 'Send Message';
+        buttonIcon.classList.remove('hidden');
+        buttonLoader.classList.add('hidden');
+        submitButton.disabled = false;
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 5000);
+      });
+    }
+
+    // FAQ Toggle Functionality
+    function toggleFAQ(button) {
+      const faqItem = button.closest('.faq-item');
+      const answer = faqItem.querySelector('.faq-answer');
+      const icon = button.querySelector('i');
+
+      // Close all other FAQ items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== faqItem) {
+          const otherAnswer = item.querySelector('.faq-answer');
+          const otherIcon = item.querySelector('.faq-question i');
+          otherAnswer.classList.remove('show');
+          otherIcon.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle current item
+      if (answer.classList.contains('show')) {
+        answer.classList.remove('show');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        answer.classList.add('show');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Scroll Event Listener
+    let ticking = false;
+
+    function updateOnScroll() {
+      updateScrollProgress();
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
+    });
+
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      initContactForm();
+      updateScrollProgress();
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
