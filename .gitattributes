@@ -1,0 +1,21 @@
+# Normalise line endings so the repository behaves the same on every machine,
+# whatever the local `core.autocrlf` setting happens to be.
+* text=auto
+
+# Binary assets must never be line-ending converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.webm binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.pdf binary
+
+# Keep the screenshot gallery out of GitHub's language statistics.
+docs/screenshots/* linguist-documentation
