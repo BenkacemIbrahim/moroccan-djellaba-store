@@ -1,0 +1,40 @@
+/* Shared page chrome.
+   These rules only load on the content pages that embed the site header and
+   footer, so the home page keeps its full-bleed hero untouched.
+
+   The header is fixed, which means a page has to reserve room for it. The
+   61px / 104px values are the measured height of .header-modern at mobile and
+   desktop widths. */
+:root {
+    --header-height: 61px;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --header-height: 104px;
+    }
+}
+
+body {
+    padding-top: var(--header-height);
+}
+
+/* Page level bars (the product detail offer banner, the contact scroll
+   progress bar) sit at z-index 1001 and must stay behind the header, so the
+   header needs an explicit z-index. It has to outrank the .z-50 utility. */
+header.header-modern {
+    z-index: 1100;
+}
+
+/* The nav links inherit the host page's line-height, which would make the
+   header 2px taller here than on the home page and break the offset above. */
+.header-modern .nav-link {
+    line-height: 1.5;
+}
+
+/* The header and footer are designed in Inter; keep them on that stack even
+   when the surrounding page is typeset in another family. */
+.header-modern,
+.footer-section {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
