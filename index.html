@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJELLABTI &mdash; Premium Moroccan Djellaba &amp; Caftan Store</title>
+    <meta name="description"
+        content="Discover authentic Moroccan women's djellabas, gandouras and caftans. Handcrafted with traditional artistry, premium fabrics and free worldwide shipping.">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+    <!-- Tailwind CSS, icons and fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind theme shared by the components below -->
+    <script src="assets/js/pages/home.config.js"></script>
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="assets/css/components/header.css">
+    <link rel="stylesheet" href="assets/css/components/hero.css">
+    <link rel="stylesheet" href="assets/css/components/new-arrivals.css">
+    <link rel="stylesheet" href="assets/css/components/instagram-feed.css">
+    <link rel="stylesheet" href="assets/css/components/faq.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/pages/home.css">
+</head>
+
+<body class="font-sans inter bg-white loading">
+
+<!-- ===== MAIN HEADER ===== -->
+    <header class="header-modern fixed top-0 left-0 w-full z-50">
+        <!-- Top Header Bar -->
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between relative">
+                <!-- Left Section: Mobile Menu & Controls -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden" id="mobile-menu-btn">
+                        <i class="ph ph-list text-xl"></i>
+                    </button>
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden"
+                        id="mobile-search-btn" onclick="openFullScreenSearch()">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <!-- Currency Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="currency-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <span id="selected-currency">MAD</span>
+                            <i id="currency-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="currency-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="EUR">
+                                EUR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="MAD">
+                                MAD
+                                <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="USD">
+                                USD
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="AED">
+                                AED
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="SAR">
+                                SAR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Language Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="language-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <img id="language-flag-icon" src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                class="w-5 h-3 object-cover mr-2">
+                            <span id="selected-language">EN</span>
+                            <i id="language-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="language-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="EN" data-flag="https://flagcdn.com/w40/gb.png">
+                                <img src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                EN <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="FR" data-flag="https://flagcdn.com/w40/fr.png">
+                                <img src="https://flagcdn.com/w40/fr.png" alt="French Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                FR
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="AR" data-flag="https://flagcdn.com/w40/ma.png">
+                                <img src="https://flagcdn.com/w40/ma.png" alt="Arabic Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                AR
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Section: Logo -->
+                <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0">
+                    <img src="assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto">
+                    <div class="hidden sm:block">
+                        <div class="logo-text">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Action Buttons -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center hidden md:flex"
+                        id="desktop-search-btn">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="wishlist-btn">
+                        <i class="ph ph-heart text-xl"></i>
+                        <!-- Updated wishlist badge from 3 to 1 -->
+                        <span class="wishlist-badge">1</span>
+                    </button>
+
+                    <!-- User Authentication Dropdown -->
+                    <div class="relative group">
+                        <button class="icon-button w-9 h-9 flex items-center justify-center" id="auth-dropdown-btn">
+                            <i class="ph ph-user text-xl"></i>
+                        </button>
+                        <div id="auth-dropdown-menu"
+                            class="absolute right-0 mt-2 w-40 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-right border border-border">
+                            <!-- Removed My Orders and Wishlist buttons -->
+                            <a href="pages/login.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-user mr-3"></i> My Profile
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-gear mr-3"></i> Settings
+                            </a>
+                            <a href="pages/contact.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-question mr-3 flex-shrink-0"></i>
+                                <span class="whitespace-nowrap">Help & Support</span>
+                            </a>
+                            <div class="border-t border-border my-1"></div>
+                            <a href="pages/login.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-sign-out mr-3"></i> Sign Out
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="cart-btn">
+                        <i class="ph ph-shopping-cart text-xl"></i>
+                        <!-- Updated cart badge from 4 to 1 -->
+                        <span class="cart-badge">1</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu hidden md:block">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center space-x-2">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="#new-arrivals" class="nav-link">New Arrivals</a>
+                    <a href="pages/products.html" class="nav-link">Djellaba</a>
+                    <a href="pages/products.html" class="nav-link">Gandoura</a>
+                    <a href="pages/products.html" class="nav-link">Abayas</a>
+                    <a href="pages/products.html" class="nav-link">Hijabs</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== FULL SCREEN SEARCH ===== -->
+    <div class="full-screen-search" id="full-screen-search">
+        <div class="full-screen-search-content">
+            <input type="text" class="full-screen-search-input" placeholder="Search our store">
+            <button class="full-screen-search-icon">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="full-screen-close-icon" id="full-screen-close-search">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <!-- Mobile Menu Header -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="assets/images/logo.png" alt="DJELLABTI Logo" class="h-10 w-auto">
+                    <div>
+                        <div class="logo-text text-lg">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+                <button id="close-mobile-menu" class="icon-button w-9 h-9 flex items-center justify-center">
+                    <i class="ph ph-x text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Settings -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Currency</label>
+                    <select id="mobile-currency-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EUR">EUR</option>
+                        <option value="MAD" selected>MAD</option>
+                        <option value="USD">USD</option>
+                        <option value="AED">AED</option>
+                        <option value="SAR">SAR</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Language</label>
+                    <select id="mobile-language-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EN" data-flag="https://flagcdn.com/w40/gb.png" selected>English</option>
+                        <option value="FR" data-flag="https://flagcdn.com/w40/fr.png">Français</option>
+                        <option value="AR" data-flag="https://flagcdn.com/w40/ma.png">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="py-4">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="#new-arrivals" class="mobile-nav-link">New Arrivals</a>
+            <a href="pages/products.html" class="mobile-nav-link">Djellaba</a>
+            <a href="pages/products.html" class="mobile-nav-link">Gandoura</a>
+            <a href="pages/products.html" class="mobile-nav-link">Abayas</a>
+            <a href="pages/products.html" class="mobile-nav-link">Hijabs</a>
+        </nav>
+    </div>
+
+    <!-- ===== WISHLIST SIDEBAR ===== -->
+    <div class="wishlist-sidebar" id="wishlist-sidebar">
+        <!-- Wishlist Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
+                </div>
+            </div>
+            <button id="close-wishlist"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Wishlist Products -->
+        <div class="flex-1 overflow-y-auto wishlist-products p-6">
+            <!-- Updated text from 3 items to 1 item -->
+            <div class="text-xs text-text-secondary mb-4 text-left">You have 1 item in your wishlist.</div>
+            <div class="space-y-4">
+                <!-- Wishlist Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4">
+                            <p class="text-xs text-text-muted">Size: L</p>
+                            <button
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-hover text-text-secondary hover:bg-accent hover:text-white transition-all duration-200 add-to-cart-btn">
+                                <i class="ph ph-shopping-cart text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Wishlist Product 2 -->
+            </div>
+        </div>
+
+        <!-- Wishlist Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3">
+                <button
+                    class="w-full btn-professional text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3 add-all-to-cart-btn">
+                    <span>Add All to Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <!-- Cart Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>
+                </div>
+            </div>
+            <button id="close-cart"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Cart Products -->
+        <div class="flex-1 overflow-y-auto cart-products p-6">
+            <div class="space-y-4">
+                <!-- Cart Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4" data-product-id="1">
+                            <div>
+                                <p class="text-xs text-text-muted">Size: L</p>
+                                <a href="#" class="text-accent text-xs underline hover:no-underline mt-1 block">Edit
+                                    Order</a>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-minus">-</button>
+                                <span
+                                    class="w-8 text-center text-sm font-semibold quantity-display text-text-primary">1</span>
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Cart Product 2 and Cart Product 3 -->
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Shipping:</span>
+                    <span class="font-semibold text-green-600">FREE</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Tax:</span>
+                    <!-- Updated tax amount for single item -->
+                    <span class="font-semibold text-text-primary">30.00 MAD</span>
+                </div>
+                <div class="border-t border-border pt-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-text-primary font-playfair">Total:</span>
+                        <!-- Updated total amount for single item -->
+                        <span class="text-xl font-bold text-accent">229.99 MAD</span>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="w-full btn-whatsapp text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3">
+                <i class="ph ph-whatsapp-logo text-lg"></i>
+                <span>Buy Now</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+
+<section class="hero-background">
+    <!-- Decorative Pattern -->
+    <div class="decorative-pattern"></div>
+
+    <!-- Single Video Background (now for all screen sizes) -->
+    <div class="video-overlay">
+      <video autoplay loop muted playsinline class="w-full h-full object-cover">
+        <source src="assets/media/hero-collection.webm" type="video/webm">
+      </video>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-title playfair fade-in">
+        Premium Moroccan
+        <br>
+        <span style="color: var(--cream);">Jellaba Collection</span>
+      </h1>
+
+      <p class="hero-subtitle fade-in fade-in-delay-1">
+        Discover authentic Moroccan craftsmanship and royal heritage.
+      </p>
+
+      <div class="hero-features fade-in fade-in-delay-2">
+        <div class="feature-item">
+          <i class="fas fa-crown"></i>
+          <span>Royal Heritage</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-hand-sparkles"></i>
+          <span>Handcrafted</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-leaf"></i>
+          <span>Premium Cotton</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-shipping-fast"></i>
+          <span>Free Shipping</span>
+        </div>
+      </div>
+
+      <div class="button-container flex flex-wrap justify-center items-center gap-4 fade-in fade-in-delay-3">
+        <button class="ocean-effect" onclick="exploreCollection()">
+          <div class="wave-layer"></div>
+          <div class="fill-layer"></div>
+          <span class="button-text">
+            <i class="fas fa-eye"></i>
+            Explore Collection
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="text-sm mb-2">Discover More</div>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+<main id="new-arrivals" class="text-text-primary leading-relaxed antialiased container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    <div class="main-content">
+      <!-- Header -->
+      <section class="text-center mb-12">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-primary mb-4">
+          New Arrivals
+        </h1>
+      </section>
+
+      <!-- Products Grid -->
+      <div class="products-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:gap-8">
+
+        <!-- Product Card 1 - Djellaba Bicolor -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <!-- Skeleton Content -->
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+
+            <!-- Actual Content -->
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/djellaba-in-crepe-pleated-bicolor-moroccan-women.jpg-W11wXQCCClHaIEIUVyKRZYQpQnsI3x.jpeg"
+                alt="Djellaba in Crepe Pleated Bicolor">
+              <div class="discount-badge-top">-20%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-info">
+            <!-- Skeleton Content -->
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+
+            <!-- Actual Content -->
+            <div class="actual-content">
+              <h3 class="product-title">Djellaba in Crepe Pleated Bicolor</h3>
+              <div class="price-container">
+                <span class="current-price">1,200.00 DH</span>
+                <span class="original-price">1,500.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 - Djellaba in Crinkled Crepe -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/djellaba-in-crinkled-crepe-uni.jpg-kweirrfLs4xGVGxjBImfORc2QKlnTb.jpeg"
+                alt="Djellaba in Crinkled Crepe Uni">
+              <div class="discount-badge-top">-15%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Djellaba in Crinkled Crepe Uni</h3>
+              <div class="price-container">
+                <span class="current-price">950.00 DH</span>
+                <span class="original-price">1,120.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 - Djellaba in Plain Crepe -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/djellaba-in-plain-crepe-moroccan-djellaba-for-women.jpg-Hug7B0qp8aC2Nx3wWBSq0Xi3MqkdfB.jpeg"
+                alt="Djellaba in Plain Crepe">
+              <div class="discount-badge-top">-25%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Djellaba in Plain Crepe</h3>
+              <div class="price-container">
+                <span class="current-price">850.00 DH</span>
+                <span class="original-price">1,130.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 4 - Djellaba in Linen Embroidered -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/djellaba-in-linen-embroidered-with-golden-thread.jpg-c9pELMD4wxFOVhB2KFzQFwcWN2pfoB.jpeg"
+                alt="Djellaba in Linen Embroidered with Golden Thread">
+              <div class="discount-badge-top">-30%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Djellaba in Linen Embroidered</h3>
+              <div class="price-container">
+                <span class="current-price">1,400.00 DH</span>
+                <span class="original-price">2,000.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 5 - Linen Djellaba Gandoura -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/linen-djellaba-gandoura.jpg-1sUAsI1s1MU76eEvWzfW3j1JLosg4T.jpeg"
+                alt="Linen Djellaba Gandoura">
+              <div class="discount-badge-top">-18%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Linen Djellaba Gandoura</h3>
+              <div class="price-container">
+                <span class="current-price">1,150.00 DH</span>
+                <span class="original-price">1,400.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 6 - Mlifa Djellaba Women Moroccan -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mlifa-djellaba-women-moroccan.jpg-MrpiECdh1hCMKF9p1EiYJ1lBeTcn8I.jpeg"
+                alt="Mlifa Djellaba Women Moroccan">
+              <div class="discount-badge-top">-22%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Mlifa Djellaba Women Moroccan</h3>
+              <div class="price-container">
+                <span class="current-price">980.00 DH</span>
+                <span class="original-price">1,250.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 7 - Caftan with Two-tone Sfifa -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/caftan-with-two-tone-sfifa.jpg-g4dKqGhxU7JstUgKhV9xN0vlC6FHQb.jpeg"
+                alt="Caftan with Two-tone Sfifa">
+              <div class="discount-badge-top">-28%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Caftan with Two-tone Sfifa</h3>
+              <div class="price-container">
+                <span class="current-price">1,300.00 DH</span>
+                <span class="original-price">1,800.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 8 - Velvet Djellaba Lapel Green -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/velvet-djellaba-lapel-in-moroccan-mlifa-green.jpg-4xZEdVT2wIRs4saZnE2boHtfvv8eUT.jpeg"
+                alt="Velvet Djellaba Lapel in Moroccan Mlifa Green">
+              <div class="discount-badge-top">-24%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Velvet Djellaba Lapel Green</h3>
+              <div class="price-container">
+                <span class="current-price">1,520.00 DH</span>
+                <span class="original-price">2,000.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 9 - Plain Crepe Caftan Moroccan -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/plain-crepe-caftan-moroccan.jpg-47OEBcHtN4GrdhuyKGVmU5GYii7ITs.jpeg"
+                alt="Plain Crepe Caftan Moroccan">
+              <div class="discount-badge-top">-19%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Plain Crepe Caftan Moroccan</h3>
+              <div class="price-container">
+                <span class="current-price">1,080.00 DH</span>
+                <span class="original-price">1,330.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 10 - Printed Detail Moroccan Caftan -->
+        <div class="product-card">
+          <div class="product-image-container">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-image"></div>
+              <div class="skeleton skeleton-discount-top"></div>
+            </div>
+            <div class="actual-content">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Printed-detail-moroccan-caftan.jpg-NaExIc9lNg9qO3QoTBwdDFNBPCAvt0.jpeg"
+                alt="Printed Detail Moroccan Caftan">
+              <div class="discount-badge-top">-26%</div>
+              <div class="action-buttons">
+                <div class="action-btn cart-btn">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div class="tooltip">ADD TO CART</div>
+                </div>
+                <div class="action-btn wishlist-btn">
+                  <i class="far fa-heart"></i>
+                  <div class="tooltip">ADD TO WISHLIST</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="skeleton-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="skeleton skeleton-price"></div>
+                <div class="skeleton skeleton-original-price"></div>
+              </div>
+            </div>
+            <div class="actual-content">
+              <h3 class="product-title">Printed Detail Moroccan Caftan</h3>
+              <div class="price-container">
+                <span class="current-price">1,180.00 DH</span>
+                <span class="original-price">1,590.00 DH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+<!-- Main container now uses grid for large screens, and wider max-width -->
+    <section class="container mx-auto md:px-4 lg:max-w-6xl xl:max-w-7xl lg:grid lg:grid-cols-3 lg:gap-8">
+
+        <!-- Left Sidebar Post - Hidden on small/medium screens, visible on large -->
+        <div class="hidden lg:block">
+            <div
+                class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50">
+                <!-- Skeleton Loader (initially visible) -->
+                <div class="skeleton-loader">
+                    <div class="flex items-center p-3 border-b border-gray-200">
+                        <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                        <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                        <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                    </div>
+                </div>
+                <!-- Actual Content (initially hidden) -->
+                <div class="actual-content hidden">
+                    <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                    alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                            </div>
+                            <a href="https://www.instagram.com/user_alpha/" target="_blank" rel="noopener noreferrer"
+                                class="hover:underline">
+                                <span class="font-semibold text-sm">user_alpha</span>
+                            </a>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                    </div>
+                    <div
+                        class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                        <img src="https://i.pinimg.com/1200x/80/16/37/801637b8362aff1752be2f011040eead.jpg"
+                            alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        <img src="https://i.pinimg.com/736x/0c/85/f3/0c85f36e973e37c903ab1f420e64f7df.jpg"
+                            alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    </div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                data-likes="12345"></i>
+                            <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-sm caption-text">
+                            <span class="font-semibold">user_alpha</span> A beautiful sunset view! #sunset #nature
+                        </p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <p class="text-xs text-gray-400 uppercase">1 day ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Instagram Post Container - Spans middle column on large screens, hidden on small -->
+        <div
+            class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50 lg:col-span-1 hidden lg:block">
+
+            <!-- Skeleton Loader (initially visible) -->
+            <div class="skeleton-loader">
+                <div class="flex items-center p-3 border-b border-gray-200">
+                    <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                    <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                    <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                <div class="flex items-center justify-between p-3">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="px-3 pb-2">
+                    <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                    <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                    <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                </div>
+                <div class="px-3 pb-3">
+                    <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                </div>
+            </div>
+
+            <!-- Actual Content (initially hidden) -->
+            <div class="actual-content hidden">
+                <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                            <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                        </div>
+                        <a href="https://www.instagram.com/website-name123/" target="_blank" rel="noopener noreferrer"
+                            class="hover:underline">
+                            <span class="font-semibold text-sm">website-name123</span>
+                        </a>
+                    </div>
+                    <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                </div>
+                <div
+                    class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                    <img src="https://i.pinimg.com/1200x/37/5e/0d/375e0d6a1c3bf852d14e4079541d7877.jpg"
+                        alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    <img src="https://i.pinimg.com/1200x/80/3d/05/803d0552c3f791cfaa4b89ea3c2f13aa.jpg"
+                        alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    <img src="https://i.pinimg.com/1200x/5e/ee/c8/5eeec84d92b2251461c79d0530fabe28.jpg"
+                        alt="Post Image 3" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                </div>
+                <div class="flex items-center justify-between p-3">
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                            data-likes="799234"></i>
+                        <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="text-sm caption-text">
+                        <span class="font-semibold">websit-name123</span> Exploring the beautiful mountains! What an
+                        amazing view. #instagram #ducky #websitename123
+                    </p>
+                </div>
+                <div class="px-3 pb-2">
+                    <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <p class="text-xs text-gray-400 uppercase">2 hours ago</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar Post - Hidden on small/medium screens, visible on large -->
+        <div class="hidden lg:block">
+            <div
+                class="instagram-post bg-white border border-gray-200 shadow-sm w-full mx-auto my-4 overflow-hidden min-h-[400px] lg:shadow-2xl lg:shadow-gray-400/50">
+                <!-- Skeleton Loader (initially visible) -->
+                <div class="skeleton-loader">
+                    <div class="flex items-center p-3 border-b border-gray-200">
+                        <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                        <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                        <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                        <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                    </div>
+                </div>
+                <!-- Actual Content (initially hidden) -->
+                <div class="actual-content hidden">
+                    <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                    alt="User Profile Picture" class="w-full h-full rounded-full object-cover bg-white">
+                            </div>
+                            <a href="https://www.instagram.com/travel_explorer/" target="_blank"
+                                rel="noopener noreferrer" class="hover:underline">
+                                <span class="font-semibold text-sm">travel_explorer</span>
+                            </a>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                    </div>
+                    <div
+                        class="image-carousel relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                        <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                            alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        <img src="https://i.pinimg.com/736x/d8/67/4a/d8674ac3c138f6cb3113fa3c15fac13e.jpg"
+                            alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                    </div>
+                    <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                data-likes="56789"></i>
+                            <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-sm caption-text">
+                            <span class="font-semibold">travel_explorer</span> Adventures await! #travel #explore
+                        </p>
+                    </div>
+                    <div class="px-3 pb-2">
+                        <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                    </div>
+                    <div class="px-3 pb-3">
+                        <p class="text-xs text-gray-400 uppercase">3 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Small Screen Post Carousel - 3 cards only, NO touch scrolling for cards -->
+        <div class="block lg:hidden relative w-full px-4">
+            <div id="small-screen-post-carousel"
+                class="posts-carousel-no-touch overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar py-4 space-x-4">
+
+                <!-- Card 1: Main Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/website-name123/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">website-name123</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/1200x/37/5e/0d/375e0d6a1c3bf852d14e4079541d7877.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/1200x/80/3d/05/803d0552c3f791cfaa4b89ea3c2f13aa.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/1200x/5e/ee/c8/5eeec84d92b2251461c79d0530fabe28.jpg"
+                                alt="Post Image 3" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="799234"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">websit-name123</span> Exploring the beautiful mountains!
+                                What an amazing view. #instagram #ducky #websitename123
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">2 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Left Sidebar Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/user_alpha/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">user_alpha</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/736x/c2/9e/53/c29e531f38616aa93fafa4f5e73c16a8.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="12345"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">user_alpha</span> A beautiful sunset view! #sunset #nature
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Right Sidebar Post -->
+                <div
+                    class="instagram-post bg-white border border-gray-200 shadow-sm flex-shrink-0 w-full snap-center overflow-hidden min-h-[400px] shadow-lg shadow-gray-400/50">
+                    <!-- Skeleton Loader -->
+                    <div class="skeleton-loader">
+                        <div class="flex items-center p-3 border-b border-gray-200">
+                            <div class="w-10 h-10 rounded-full skeleton-placeholder"></div>
+                            <div class="ml-3 h-4 w-24 rounded skeleton-placeholder"></div>
+                            <div class="ml-auto w-5 h-5 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] skeleton-placeholder"></div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                                <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                            </div>
+                            <div class="w-6 h-6 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <div class="h-4 w-20 rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-full rounded skeleton-placeholder mb-2"></div>
+                            <div class="h-4 w-3/4 rounded skeleton-placeholder"></div>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <div class="h-3 w-16 rounded skeleton-placeholder"></div>
+                        </div>
+                    </div>
+                    <!-- Actual Content -->
+                    <div class="actual-content hidden">
+                        <div class="flex items-center justify-between p-3 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <div class="relative w-10 h-10 rounded-full p-0.5 instagram-gradient-border">
+                                    <img src="https://i.pinimg.com/736x/f0/a7/56/f0a756d38857bfde016cb88e52f6f85f.jpg"
+                                        alt="User Profile Picture"
+                                        class="w-full h-full rounded-full object-cover bg-white">
+                                </div>
+                                <a href="https://www.instagram.com/travel_explorer/" target="_blank"
+                                    rel="noopener noreferrer" class="hover:underline">
+                                    <span class="font-semibold text-sm">travel_explorer</span>
+                                </a>
+                            </div>
+                            <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-500 cursor-pointer"></i>
+                        </div>
+                        <!-- FIXED: Image carousel with touch support for mobile only -->
+                        <div
+                            class="image-carousel image-carousel-mobile-touch relative w-full aspect-[4/3] overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+                            <img src="https://i.pinimg.com/736x/8a/d2/9e/8ad29e8e05818ef0fbc52140eb65fd3b.jpg"
+                                alt="Post Image 1" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                            <img src="https://i.pinimg.com/736x/c2/9e/53/c29e531f38616aa93fafa4f5e73c16a8.jpg"
+                                alt="Post Image 2" class="carousel-item w-full flex-shrink-0 snap-center object-cover">
+                        </div>
+                        <div class="flex items-center justify-between p-3">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="heart" class="lucide-heart w-6 h-6 text-gray-700 cursor-pointer"
+                                    data-likes="56789"></i>
+                                <i data-lucide="message-circle" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                                <i data-lucide="send" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                            </div>
+                            <i data-lucide="bookmark" class="w-6 h-6 text-gray-700 cursor-pointer"></i>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="font-semibold text-sm"><span class="likes-count"></span> likes</p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-sm caption-text">
+                                <span class="font-semibold">travel_explorer</span> Adventures await! #travel #explore
+                            </p>
+                        </div>
+                        <div class="px-3 pb-2">
+                            <p class="text-xs text-gray-500 cursor-pointer">View all comments</p>
+                        </div>
+                        <div class="px-3 pb-3">
+                            <p class="text-xs text-gray-400 uppercase">3 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons for Small Screen Carousel -->
+            <button id="carousel-left-btn"
+                class="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 ml-2">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button id="carousel-right-btn"
+                class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 mr-2">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </section>
+
+<!-- Container with no border-radius -->
+    <div class="bg-black text-white p-8 w-full">
+        <h2 class="text-5xl font-serif-custom text-white mb-12 tracking-wide text-center">
+            FAQS
+        </h2>
+        <!-- Inner div to center the questions and give them a max-width -->
+        <div class="w-full max-w-3xl mx-auto">
+            <!-- FAQ Item 1 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="0">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-1">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How long does it take to ship?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-1" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Shipping typically takes 3-5 business days for domestic orders and 7-14 business days for international orders.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="100">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-2">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How to track my order?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-2" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Once your order has shipped, you will receive an email with a tracking number. You can use this number on our website or the carrier's website to track your package.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="200">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-3">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How do I place a return or exchange?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-3" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">Please visit our Returns & Exchanges page for detailed instructions and to initiate a return or exchange request.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 - no border-bottom -->
+            <div class="faq-item faq-item-hidden py-4" data-delay="300">
+                <button class="faq-question flex items-center justify-between w-full text-left text-lg font-medium text-gray-200 focus:outline-none"
+                        aria-expanded="false" aria-controls="faq-answer-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="chevron-icon h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <span>How to change the delivery address and contact information?</span>
+                    </div>
+                </button>
+                <div id="faq-answer-4" class="faq-answer">
+                    <p class="pl-12 text-gray-400 text-base">If your order has not yet shipped, please contact our customer support immediately to update your delivery address or contact information. Once shipped, changes may not be possible.</p>
+                </div>
+            </div>
+
+      
+
+          
+        </div>
+    </div>
+
+<!-- Professional Footer with Updated Colors -->
+    <footer class="footer-section text-white py-12 px-4 sm:px-6 md:px-8">
+        <div class="max-w-6xl mx-auto">
+
+            <!-- Main Footer Content -->
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-3 mb-8">
+
+                <!-- Company Info with Logo -->
+                <div id="footer-block-1" class="footer-fade-in loading">
+                    <!-- Skeleton Logo -->
+                    <div class="skeleton-footer skeleton-logo"></div>
+
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title"></div>
+
+                    <!-- Skeleton Text -->
+                    <div class="skeleton-footer skeleton-text"></div>
+                    <div class="skeleton-footer skeleton-text"></div>
+                    <div class="skeleton-footer skeleton-text short"></div>
+
+                    <!-- Skeleton Established Text -->
+                    <div class="skeleton-footer skeleton-text short mt-4"></div>
+                </div>
+
+                <!-- Quick Links -->
+                <div id="footer-block-2" class="footer-fade-in loading">
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title mb-4"></div>
+
+                    <!-- Skeleton Links -->
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                </div>
+
+                <!-- Contact & Social -->
+                <div id="footer-block-3" class="footer-fade-in loading">
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title mb-4"></div>
+
+                    <!-- Skeleton Contact Info -->
+                    <div class="skeleton-footer skeleton-contact"></div>
+                    <div class="skeleton-footer skeleton-contact"></div>
+                    <div class="skeleton-footer skeleton-contact"></div>
+
+                    <!-- Skeleton Buttons -->
+                    <div class="skeleton-footer skeleton-button mt-6"></div>
+                    <div class="skeleton-footer skeleton-button"></div>
+
+                    <!-- Skeleton Social Icons -->
+                    <div class="flex space-x-3 mt-6">
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skeleton Divider -->
+            <div class="skeleton-footer mb-6" style="height: 1px;"></div>
+
+            <!-- Skeleton Bottom Footer -->
+            <div id="footer-bottom" class="footer-fade-in loading">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="skeleton-footer" style="width: 250px; height: 16px;"></div>
+                    <div class="flex space-x-6">
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script src="assets/js/components/header.js"></script>
+    <script src="assets/js/components/hero.js"></script>
+    <script src="assets/js/components/new-arrivals.js"></script>
+    <script src="assets/js/components/instagram-feed.js"></script>
+    <script src="assets/js/components/faq.js"></script>
+    <script src="assets/js/components/footer.js"></script>
+</body>
+
+</html>

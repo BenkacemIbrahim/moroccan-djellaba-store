@@ -1,0 +1,14 @@
+/* Home page composition layer.
+   Every component ships its own body-level defaults, so once they are stacked
+   on one page the last stylesheet imported wins. The rules below pin the
+   page-level look back to what the sections expect. */
+body {
+  background: #ffffff;
+  /* footer.css loads last and redefines --text-primary; pin the header's value. */
+  color: #1a1a1a;
+}
+
+/* Anchor targets sit below the fixed header. */
+#new-arrivals {
+  scroll-margin-top: 7.5rem;
+}
