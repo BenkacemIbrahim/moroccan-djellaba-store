@@ -7,7 +7,7 @@
   <title>Breadcrumb Section</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="../../../assets/css/components/breadcrumb.css">
+  <link rel="stylesheet" href="../assets/css/components/breadcrumb.css">
 </head>
 
 <body class="bg-gray-50">
@@ -56,35 +56,7 @@
   </div>
   </div>
 
-  <script>
-    // Content loading functionality
-    function showContent() {
-      const loadingContent = document.getElementById('loading-content');
-      const mainContent = document.getElementById('main-content');
-
-      loadingContent.classList.remove('loaded');
-      mainContent.classList.add('loaded');
-    }
-
-    function showLoading() {
-      const loadingContent = document.getElementById('loading-content');
-      const mainContent = document.getElementById('main-content');
-
-      mainContent.classList.remove('loaded');
-      loadingContent.classList.add('loaded');
-    }
-
-    // Initialize with loading state, then show content after delay
-    document.addEventListener('DOMContentLoaded', function () {
-      showLoading();
-
-      // Simulate loading time
-      setTimeout(() => {
-        showContent();
-      }, 2000);
-    });
-
-  </script>
+  <script src="../assets/js/components/breadcrumb.js"></script>
 </body>
 
 </html>

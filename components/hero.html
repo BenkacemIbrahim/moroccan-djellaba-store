@@ -13,7 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../../../assets/css/components/hero.css">
+  <link rel="stylesheet" href="../assets/css/components/hero.css">
 </head>
 
 <body class="inter">
@@ -78,36 +78,7 @@
     </div>
   </section>
 
-  <script>
-    // Button Actions
-    function exploreCollection() {
-      console.log('Exploring collection...');
-      // Add smooth scroll to products section or redirect to catalog
-      // window.location.href = '#products';
-    }
-
-    // Smooth scroll for scroll indicator
-    document.querySelector('.scroll-indicator').addEventListener('click', function () {
-      window.scrollBy({
-        top: window.innerHeight,
-        behavior: 'smooth'
-      });
-    });
-
-    // Add parallax effect to decorative pattern
-    window.addEventListener('scroll', function () {
-      const scrolled = window.pageYOffset;
-      const pattern = document.querySelector('.decorative-pattern');
-      if (pattern) {
-        pattern.style.transform = `translate(-50%, -50%) rotate(${scrolled * 0.1}deg)`;
-      }
-    });
-
-    // Initialize animations on load
-    document.addEventListener('DOMContentLoaded', function () {
-      console.log('Premium Moroccan Jellaba Hero Page Loaded');
-    });
-  </script>
+  <script src="../assets/js/components/hero.js"></script>
 </body>
 
 </html>
