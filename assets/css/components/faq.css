@@ -1,0 +1,32 @@
+/* Custom styles for the accordion effect */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .faq-answer.open {
+            opacity: 1;
+            margin-top: 0.5rem; /* mt-2 */
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item.open .chevron-icon {
+            transform: rotate(180deg);
+        }
+        /* Custom font for the title if not available in Tailwind defaults */
+        .font-serif-custom {
+            font-family: Georgia, serif; /* Example serif font */
+        }
+
+        /* Styles for lazy loading/delayed appearance */
+        .faq-item-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .faq-item-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }

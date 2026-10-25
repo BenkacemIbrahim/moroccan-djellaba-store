@@ -1,0 +1,40 @@
+/* Custom styles for Lucide icons */
+        .lucide {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Skeleton effect (static gray) */
+        .skeleton-placeholder {
+            background-color: #e0e0e0;
+            /* Solid gray for static skeleton */
+        }
+
+        /* Instagram-like gradient border for profile picture */
+        .instagram-gradient-border {
+            background-image: linear-gradient(to top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+        }
+
+        /* Hide scrollbar for carousel but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* FIXED: Disable touch scrolling for post cards carousel */
+        .posts-carousel-no-touch {
+            touch-action: none;
+            -webkit-overflow-scrolling: auto;
+        }
+
+        /* FIXED: Enable touch scrolling for image carousel on mobile only */
+        .image-carousel-mobile-touch {
+            touch-action: pan-x;
+            -webkit-overflow-scrolling: touch;
+        }
