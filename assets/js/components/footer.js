@@ -1,9 +1,18 @@
+// The footer is rendered both by the home page (at the project root) and by the
+// standalone component preview (one folder deeper), so every link and asset is
+// resolved from the location of this script instead of being hard-coded.
+const FOOTER_ROOT = (function () {
+    const script = document.querySelector('script[src$="js/components/footer.js"]');
+    const src = script ? script.getAttribute('src') : '';
+    return src.replace(/assets\/js\/components\/footer\.js.*$/, '');
+})();
+
 // Footer content data with women's djellaba focus
-        const footerContent = {
-            block1: `
+const footerContent = {
+    block1: `
       <!-- Logo Image from Header (Same as header logo) -->
       <div class="logo-container">
-         <a href="home.php"> <img src="../assets/images/logo.png" alt="Moroccan Djellaba Shop Logo" class="logo-image-footer"></a>
+         <a href="${FOOTER_ROOT}index.html"> <img src="${FOOTER_ROOT}assets/images/logo.png" alt="Moroccan Djellaba Shop Logo" class="logo-image-footer"></a>
       </div>
       
       <h2 class="text-xl font-semibold logo-text mb-4 playfair">
@@ -19,42 +28,42 @@
           <span class="text-custom-gold">Established 2015</span> • Authentic Moroccan Fashion
       </div>
   `,
-            block2: `
+    block2: `
       <h3 class="text-lg font-medium mb-4 text-custom-gold inter">Quick Links</h3>
       <ul class="space-y-2 text-sm">
           <li>
-              <a href="home.php" class="footer-link inter">
+              <a href="${FOOTER_ROOT}index.html" class="footer-link inter">
                   <i class="fas fa-home mr-3 text-custom-gold"></i>
                   Home 
               </a>
           </li>
           <li>
-              <a href="products.php" class="footer-link inter">
+              <a href="${FOOTER_ROOT}pages/products.html" class="footer-link inter">
                   <i class="fas fa-box mr-3 text-custom-gold"></i>
                  Women's Collection  
               </a>
           </li>
           <li>
-              <a href="about-us.php" class="footer-link inter">
+              <a href="#" class="footer-link inter">
                   <i class="fas fa-users mr-3 text-custom-gold"></i>
                 About Us
               </a>
           </li>
           <li>
-              <a href="contact-us.php" class="footer-link inter">
+              <a href="${FOOTER_ROOT}pages/contact.html" class="footer-link inter">
                   <i class="fas fa-envelope mr-3 text-custom-gold"></i>
                    Contact Us
               </a>
           </li>
           <li>
-              <a href="privacy-policy.php" class="footer-link inter">
+              <a href="#" class="footer-link inter">
                   <i class="fas fa-shield-alt mr-3 text-custom-gold"></i>
                   Privacy & Policy 
               </a>
           </li>
       </ul>
   `,
-            block3: `
+    block3: `
       <h3 class="text-lg font-medium mb-4 text-custom-gold inter">Contact</h3>
       <div class="space-y-2 text-sm text-gray-400 mb-6">
           <div class="contact-info inter">
@@ -115,16 +124,16 @@
           </a>
       </div>
   `,
-            bottom: `
+    bottom: `
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div class="text-sm text-gray-500 inter">
               © 2025 Djellaba Shop. All rights reserved.
           </div>
           
           <div class="flex space-x-6 text-sm">
-              <a href="privacy-policy.php" class="footer-link inter">Privacy</a>
-              <a href="terms.php" class="footer-link inter">Terms</a>
-              <a href="contact-us.php" class="footer-link inter">Support</a>
+              <a href="#" class="footer-link inter">Privacy</a>
+              <a href="#" class="footer-link inter">Terms</a>
+              <a href="${FOOTER_ROOT}pages/contact.html" class="footer-link inter">Support</a>
           </div>
       </div>
       
@@ -138,99 +147,82 @@
           </div>
       </div>
   `
-        };
+};
 
-        // Load footer content
-        function loadFooterContent() {
-            // Load footer blocks with staggered animation
-            setTimeout(() => {
-                const block1 = document.getElementById('footer-block-1');
-                if (block1) {
-                    block1.innerHTML = footerContent.block1;
-                    block1.classList.remove('loading');
-                    block1.classList.add('show');
-                }
-            }, 200);
-
-            setTimeout(() => {
-                const block2 = document.getElementById('footer-block-2');
-                if (block2) {
-                    block2.innerHTML = footerContent.block2;
-                    block2.classList.remove('loading');
-                    block2.classList.add('show');
-                }
-            }, 400);
-
-            setTimeout(() => {
-                const block3 = document.getElementById('footer-block-3');
-                if (block3) {
-                    block3.innerHTML = footerContent.block3;
-                    block3.classList.remove('loading');
-                    block3.classList.add('show');
-                }
-            }, 600);
-
-            setTimeout(() => {
-                const footerBottom = document.getElementById('footer-bottom');
-                if (footerBottom) {
-                    footerBottom.innerHTML = footerContent.bottom;
-                    footerBottom.classList.remove('loading');
-                    footerBottom.classList.add('show');
-                }
-            }, 800);
-
-            // Add event listeners to footer links
-            setTimeout(() => {
-                addFooterEventListeners();
-            }, 1000);
+// Load footer content
+function loadFooterContent() {
+    // Load footer blocks with staggered animation
+    setTimeout(() => {
+        const block1 = document.getElementById('footer-block-1');
+        if (block1) {
+            block1.innerHTML = footerContent.block1;
+            block1.classList.remove('loading');
+            block1.classList.add('show');
         }
+    }, 200);
 
-        // Add event listeners to footer links
-        function addFooterEventListeners() {
-            // Quick links
-            document.querySelectorAll('.footer-link').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const linkText = this.textContent.trim();
-                    console.log(`Clicked on: ${linkText}`);
-                });
-            });
-
-            // Social icons
-            document.querySelectorAll('.footer-social-icon').forEach(icon => {
-                icon.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const platform = this.getAttribute('aria-label');
-                    console.log(`Clicked on social platform: ${platform}`);
-                });
-            });
-
-            // Store buttons
-            document.querySelectorAll('.store-btn').forEach(btn => {
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const storeType = this.querySelector('.store-text-bottom').textContent;
-                    console.log(`Clicked on ${storeType} button`);
-                });
-            });
+    setTimeout(() => {
+        const block2 = document.getElementById('footer-block-2');
+        if (block2) {
+            block2.innerHTML = footerContent.block2;
+            block2.classList.remove('loading');
+            block2.classList.add('show');
         }
+    }, 400);
 
-        // Initialize footer with intersection observer
-        document.addEventListener('DOMContentLoaded', function () {
-            const footerObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Auto-load footer content after 2 seconds for demo
-                        setTimeout(() => {
-                            loadFooterContent();
-                        }, 2000);
-                        footerObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
+    setTimeout(() => {
+        const block3 = document.getElementById('footer-block-3');
+        if (block3) {
+            block3.innerHTML = footerContent.block3;
+            block3.classList.remove('loading');
+            block3.classList.add('show');
+        }
+    }, 600);
 
-            const footer = document.querySelector('.footer-section');
-            if (footer) {
-                footerObserver.observe(footer);
+    setTimeout(() => {
+        const footerBottom = document.getElementById('footer-bottom');
+        if (footerBottom) {
+            footerBottom.innerHTML = footerContent.bottom;
+            footerBottom.classList.remove('loading');
+            footerBottom.classList.add('show');
+        }
+    }, 800);
+
+    // Add event listeners to footer links
+    setTimeout(() => {
+        addFooterEventListeners();
+    }, 1000);
+}
+
+// Links that point at a real page must be allowed to navigate, only the
+// placeholder targets are neutralised.
+function addFooterEventListeners() {
+    const selectors = ['.footer-link', '.footer-social-icon', '.store-btn'];
+    selectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((link) => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', (event) => event.preventDefault());
             }
         });
+    });
+}
+
+// Initialize footer with intersection observer
+document.addEventListener('DOMContentLoaded', function () {
+    const footerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Auto-load footer content after 2 seconds for demo
+                setTimeout(() => {
+                    loadFooterContent();
+                }, 2000);
+                footerObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const footer = document.querySelector('.footer-section');
+    if (footer) {
+        footerObserver.observe(footer);
+    }
+});
