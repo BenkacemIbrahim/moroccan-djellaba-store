@@ -1,55 +1,56 @@
-tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              DEFAULT: '#0f172a',
-              light: '#1e293b',
-              dark: '#020617'
-            },
-            accent: {
-              DEFAULT: '#C8A95A',
-              light: '#d4b882',
-              dark: '#b8965a'
-            },
-            surface: {
-              DEFAULT: '#ffffff',
-              elevated: '#f8fafc',
-              hover: '#f1f5f9'
-            },
-            border: {
-              DEFAULT: '#e2e8f0',
-              light: '#f1f5f9'
-            },
-            text: {
-              primary: '#0f172a',
-              secondary: '#475569',
-              muted: '#64748b'
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            playfair: ['"Playfair Display"', 'serif']
-          },
-          keyframes: {
-            fadeInUp: {
-              'from': { opacity: '0', transform: 'translateY(1.5rem)' },
-              'to': { opacity: '1', transform: 'translateY(0)' }
-            },
-            skeleton: {
-              '0%': { backgroundPosition: '-200px 0' },
-              '100%': { backgroundPosition: 'calc(200px + 100%) 0' }
-            },
-            shimmer: {
-              '0%': { backgroundPosition: '-1000px 0' },
-              '100%': { backgroundPosition: '1000px 0' }
-            }
-          },
-          animation: {
-            fadeInUp: 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-            skeleton: 'skeleton 1.5s ease-in-out infinite',
-            shimmer: 'shimmer 2.5s ease-in-out infinite'
-          }
-        }
-      }
+// Skeleton Loading Control
+    function showSkeletons() {
+      document.body.classList.add('loading');
     }
+
+    function hideSkeletons() {
+      document.body.classList.remove('loading');
+    }
+
+    // Simulate loading - Remove this in production and call hideSkeletons() when your data is loaded
+    setTimeout(() => {
+      hideSkeletons();
+    }, 2000); // Show skeleton for 2 seconds, then show actual content
+
+    // Add click handlers for action buttons
+    document.addEventListener('DOMContentLoaded', function () {
+      // Cart button handlers
+      document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const icon = this.querySelector('i');
+
+          if (icon.classList.contains('fa-shopping-cart')) {
+            console.log('Add to cart clicked');
+            // Add your cart functionality here
+          } else if (icon.classList.contains('fa-heart')) {
+            // Toggle wishlist
+            const isActive = this.classList.contains('active');
+            if (isActive) {
+              this.classList.remove('active');
+              icon.classList.remove('fas');
+              icon.classList.add('far');
+              console.log('Removed from wishlist');
+            } else {
+              this.classList.add('active');
+              icon.classList.remove('far');
+              icon.classList.add('fas');
+              console.log('Added to wishlist');
+            }
+          }
+        });
+      });
+
+      // Product card click handlers
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function () {
+          const title = this.querySelector('.product-title').textContent;
+          console.log('Product clicked:', title);
+          // Add your product detail navigation here
+        });
+      });
+    });
+
+    // Public functions for controlling skeleton loading
+    window.showSkeletons = showSkeletons;
+    window.hideSkeletons = hideSkeletons;
