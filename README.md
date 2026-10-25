@@ -5,6 +5,15 @@ boutique, sold under the **DJELLABTI** brand. Built with plain HTML, CSS
 (Tailwind CDN + hand-written stylesheets) and vanilla JavaScript — no build
 step, no framework, no dependencies to install.
 
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-528DD7?style=flat-square&logo=fontawesome&logoColor=white)](https://fontawesome.com)
+[![Phosphor Icons](https://img.shields.io/badge/Phosphor_Icons-3C402B?style=flat-square&logo=phosphor&logoColor=white)](https://phosphoricons.com)
+[![Google Fonts](https://img.shields.io/badge/Google_Fonts-4285F4?style=flat-square&logo=googlefonts&logoColor=white)](https://fonts.google.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
+
 ## Preview
 
 ![Home page](docs/screenshots/home-desktop.png)
