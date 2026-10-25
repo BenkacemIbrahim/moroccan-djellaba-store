@@ -7,16 +7,425 @@
     <title>Products - Women's Djellaba Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <script src="../assets/js/pages/products.config.js"></script>
 
+    <!-- Shared header and footer -->
+    <link rel="stylesheet" href="../assets/css/components/header.css">
+    <link rel="stylesheet" href="../assets/css/components/footer.css">
+
     <link rel="stylesheet" href="../assets/css/pages/products.css">
+
+    <!-- Reserves room for the fixed header on this page -->
+    <link rel="stylesheet" href="../assets/css/components/page-chrome.css">
 </head>
 
 <body class="font-sans bg-white text-text-primary leading-relaxed">
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="header-modern fixed top-0 left-0 w-full z-50">
+        <!-- Top Header Bar -->
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between relative">
+                <!-- Left Section: Mobile Menu & Controls -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden" id="mobile-menu-btn">
+                        <i class="ph ph-list text-xl"></i>
+                    </button>
+                    <button class="icon-button w-9 h-9 flex items-center justify-center md:hidden"
+                        id="mobile-search-btn" onclick="openFullScreenSearch()">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <!-- Currency Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="currency-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <span id="selected-currency">MAD</span>
+                            <i id="currency-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="currency-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="EUR">
+                                EUR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="MAD">
+                                MAD
+                                <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="USD">
+                                USD
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="AED">
+                                AED
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent currency-option flex items-center"
+                                data-currency="SAR">
+                                SAR
+                                <i class="ph ph-check ml-auto text-accent selected-check" style="display: none;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Language Dropdown -->
+                    <div class="relative group hidden md:block">
+                        <button id="language-dropdown-btn"
+                            class="icon-button w-auto px-3 h-9 flex items-center justify-center text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+                            <img id="language-flag-icon" src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                class="w-5 h-3 object-cover mr-2">
+                            <span id="selected-language">EN</span>
+                            <i id="language-chevron"
+                                class="ph ph-caret-down ml-2 text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div id="language-dropdown-menu"
+                            class="absolute left-0 mt-2 w-32 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-left border border-border">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="EN" data-flag="https://flagcdn.com/w40/gb.png">
+                                <img src="https://flagcdn.com/w40/gb.png" alt="English Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                EN <i class="ph ph-check ml-auto text-accent selected-check"></i>
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="FR" data-flag="https://flagcdn.com/w40/fr.png">
+                                <img src="https://flagcdn.com/w40/fr.png" alt="French Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                FR
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent language-option flex items-center"
+                                data-lang="AR" data-flag="https://flagcdn.com/w40/ma.png">
+                                <img src="https://flagcdn.com/w40/ma.png" alt="Arabic Flag"
+                                    class="w-5 h-3 object-cover mr-2">
+                                AR
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Section: Logo -->
+                <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0">
+                    <img src="../assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto">
+                    <div class="hidden sm:block">
+                        <div class="logo-text">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Action Buttons -->
+                <div class="flex items-center space-x-3 z-10">
+                    <button class="icon-button w-9 h-9 flex items-center justify-center hidden md:flex"
+                        id="desktop-search-btn">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="wishlist-btn">
+                        <i class="ph ph-heart text-xl"></i>
+                        <!-- Updated wishlist badge from 3 to 1 -->
+                        <span class="wishlist-badge">1</span>
+                    </button>
+
+                    <!-- User Authentication Dropdown -->
+                    <div class="relative group">
+                        <button class="icon-button w-9 h-9 flex items-center justify-center" id="auth-dropdown-btn">
+                            <i class="ph ph-user text-xl"></i>
+                        </button>
+                        <div id="auth-dropdown-menu"
+                            class="absolute right-0 mt-2 w-40 bg-surface rounded-lg shadow-lg py-1 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-right border border-border">
+                            <!-- Removed My Orders and Wishlist buttons -->
+                            <a href="login.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-user mr-3"></i> My Profile
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-gear mr-3"></i> Settings
+                            </a>
+                            <a href="contact.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-question mr-3 flex-shrink-0"></i>
+                                <span class="whitespace-nowrap">Help & Support</span>
+                            </a>
+                            <div class="border-t border-border my-1"></div>
+                            <a href="login.html"
+                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                <i class="ph ph-sign-out mr-3"></i> Sign Out
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="icon-button w-9 h-9 flex items-center justify-center" id="cart-btn">
+                        <i class="ph ph-shopping-cart text-xl"></i>
+                        <!-- Updated cart badge from 4 to 1 -->
+                        <span class="cart-badge">1</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu hidden md:block">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center space-x-2">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../index.html#new-arrivals" class="nav-link">New Arrivals</a>
+                    <a href="products.html" class="nav-link active">Djellaba</a>
+                    <a href="products.html" class="nav-link">Gandoura</a>
+                    <a href="products.html" class="nav-link">Abayas</a>
+                    <a href="products.html" class="nav-link">Hijabs</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== FULL SCREEN SEARCH ===== -->
+    <div class="full-screen-search" id="full-screen-search">
+        <div class="full-screen-search-content">
+            <input type="text" class="full-screen-search-input" placeholder="Search our store">
+            <button class="full-screen-search-icon">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+            <button class="full-screen-close-icon" id="full-screen-close-search">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <!-- Mobile Menu Header -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="../assets/images/logo.png" alt="DJELLABTI Logo" class="h-10 w-auto">
+                    <div>
+                        <div class="logo-text text-lg">DJELLABTI</div>
+                        <div class="logo-subtitle">TRADITIONAL WEAR</div>
+                    </div>
+                </div>
+                <button id="close-mobile-menu" class="icon-button w-9 h-9 flex items-center justify-center">
+                    <i class="ph ph-x text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Settings -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Currency</label>
+                    <select id="mobile-currency-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EUR">EUR</option>
+                        <option value="MAD" selected>MAD</option>
+                        <option value="USD">USD</option>
+                        <option value="AED">AED</option>
+                        <option value="SAR">SAR</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Language</label>
+                    <select id="mobile-language-select"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-700">
+                        <option value="EN" data-flag="https://flagcdn.com/w40/gb.png" selected>English</option>
+                        <option value="FR" data-flag="https://flagcdn.com/w40/fr.png">Français</option>
+                        <option value="AR" data-flag="https://flagcdn.com/w40/ma.png">العربية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="py-4">
+            <a href="../index.html" class="mobile-nav-link">Home</a>
+            <a href="../index.html#new-arrivals" class="mobile-nav-link">New Arrivals</a>
+            <a href="products.html" class="mobile-nav-link active">Djellaba</a>
+            <a href="products.html" class="mobile-nav-link">Gandoura</a>
+            <a href="products.html" class="mobile-nav-link">Abayas</a>
+            <a href="products.html" class="mobile-nav-link">Hijabs</a>
+        </nav>
+    </div>
+
+    <!-- ===== WISHLIST SIDEBAR ===== -->
+    <div class="wishlist-sidebar" id="wishlist-sidebar">
+        <!-- Wishlist Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="../assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
+                </div>
+            </div>
+            <button id="close-wishlist"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Wishlist Products -->
+        <div class="flex-1 overflow-y-auto wishlist-products p-6">
+            <!-- Updated text from 3 items to 1 item -->
+            <div class="text-xs text-text-secondary mb-4 text-left">You have 1 item in your wishlist.</div>
+            <div class="space-y-4">
+                <!-- Wishlist Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4">
+                            <p class="text-xs text-text-muted">Size: L</p>
+                            <button
+                                class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-hover text-text-secondary hover:bg-accent hover:text-white transition-all duration-200 add-to-cart-btn">
+                                <i class="ph ph-shopping-cart text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Wishlist Product 2 -->
+            </div>
+        </div>
+
+        <!-- Wishlist Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3">
+                <button
+                    class="w-full btn-professional text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3 add-all-to-cart-btn">
+                    <span>Add All to Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <!-- Cart Header -->
+        <div
+            class="flex items-center justify-between p-8 border-b border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="flex items-center">
+                <img src="../assets/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <div>
+                    <h2 class="font-playfair font-bold text-lg gradient-text">DJELLABTI</h2>
+                    <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>
+                </div>
+            </div>
+            <button id="close-cart"
+                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Cart Products -->
+        <div class="flex-1 overflow-y-auto cart-products p-6">
+            <div class="space-y-4">
+                <!-- Cart Product 1 -->
+                <div class="product-card-professional p-4 flex flex-row items-start gap-4">
+                    <div class="w-24 h-32 flex-shrink-0 overflow-hidden bg-cover bg-center shadow-lg relative"
+                        style="background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images%20%282%29-etRLLdYijvxsfU7JNMdr8z0fMsZBTc.jpeg');">
+                        <button class="remove-product-icon">
+                            <i class="ph ph-x"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col flex-grow min-w-0 h-full">
+                        <div class="flex justify-between items-start w-full">
+                            <div>
+                                <h4 class="font-semibold text-sm text-text-primary mb-1">Women's Classic Djellaba</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="font-bold text-sm text-accent">199.99 MAD</span>
+                            <span class="text-xs text-text-muted line-through">250.00 MAD</span>
+                        </div>
+                        <div class="flex justify-between items-center space-x-2 mt-auto pt-4" data-product-id="1">
+                            <div>
+                                <p class="text-xs text-text-muted">Size: L</p>
+                                <a href="#" class="text-accent text-xs underline hover:no-underline mt-1 block">Edit
+                                    Order</a>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-minus">-</button>
+                                <span
+                                    class="w-8 text-center text-sm font-semibold quantity-display text-text-primary">1</span>
+                                <button
+                                    class="w-7 h-7 rounded-full bg-surface-hover text-text-secondary flex items-center justify-center text-sm font-bold hover:bg-accent hover:text-white transition-all duration-200 quantity-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Removed Cart Product 2 and Cart Product 3 -->
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Shipping:</span>
+                    <span class="font-semibold text-green-600">FREE</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-text-secondary">Tax:</span>
+                    <!-- Updated tax amount for single item -->
+                    <span class="font-semibold text-text-primary">30.00 MAD</span>
+                </div>
+                <div class="border-t border-border pt-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-text-primary font-playfair">Total:</span>
+                        <!-- Updated total amount for single item -->
+                        <span class="text-xl font-bold text-accent">229.99 MAD</span>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="w-full btn-whatsapp text-white py-4 font-bold text-sm uppercase tracking-wide flex items-center justify-center space-x-3">
+                <i class="ph ph-whatsapp-logo text-lg"></i>
+                <span>Buy Now</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- SKELETON LOADING STATE -->
     <div id="skeleton-loader" class="loading-state">
@@ -1157,6 +1566,87 @@
     </button>
 
     <script src="../assets/js/pages/products.js"></script>
+    <!-- Professional Footer with Updated Colors -->
+    <footer class="footer-section text-white py-12 px-4 sm:px-6 md:px-8">
+        <div class="max-w-6xl mx-auto">
+
+            <!-- Main Footer Content -->
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-3 mb-8">
+
+                <!-- Company Info with Logo -->
+                <div id="footer-block-1" class="footer-fade-in loading">
+                    <!-- Skeleton Logo -->
+                    <div class="skeleton-footer skeleton-logo"></div>
+
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title"></div>
+
+                    <!-- Skeleton Text -->
+                    <div class="skeleton-footer skeleton-text"></div>
+                    <div class="skeleton-footer skeleton-text"></div>
+                    <div class="skeleton-footer skeleton-text short"></div>
+
+                    <!-- Skeleton Established Text -->
+                    <div class="skeleton-footer skeleton-text short mt-4"></div>
+                </div>
+
+                <!-- Quick Links -->
+                <div id="footer-block-2" class="footer-fade-in loading">
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title mb-4"></div>
+
+                    <!-- Skeleton Links -->
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                    <div class="skeleton-footer skeleton-link"></div>
+                </div>
+
+                <!-- Contact & Social -->
+                <div id="footer-block-3" class="footer-fade-in loading">
+                    <!-- Skeleton Title -->
+                    <div class="skeleton-footer skeleton-title mb-4"></div>
+
+                    <!-- Skeleton Contact Info -->
+                    <div class="skeleton-footer skeleton-contact"></div>
+                    <div class="skeleton-footer skeleton-contact"></div>
+                    <div class="skeleton-footer skeleton-contact"></div>
+
+                    <!-- Skeleton Buttons -->
+                    <div class="skeleton-footer skeleton-button mt-6"></div>
+                    <div class="skeleton-footer skeleton-button"></div>
+
+                    <!-- Skeleton Social Icons -->
+                    <div class="flex space-x-3 mt-6">
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                        <div class="skeleton-footer skeleton-social"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skeleton Divider -->
+            <div class="skeleton-footer mb-6" style="height: 1px;"></div>
+
+            <!-- Skeleton Bottom Footer -->
+            <div id="footer-bottom" class="footer-fade-in loading">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="skeleton-footer" style="width: 250px; height: 16px;"></div>
+                    <div class="flex space-x-6">
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                        <div class="skeleton-footer" style="width: 60px; height: 16px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SHARED CHROME SCRIPTS ===== -->
+    <script src="../assets/js/components/header.js"></script>
+    <script src="../assets/js/components/footer.js"></script>
 </body>
 
 </html>
